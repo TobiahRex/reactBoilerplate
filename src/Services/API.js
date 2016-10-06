@@ -3,7 +3,7 @@ import { create } from 'apisauce';
 
 
 // our "constructor"
-const createAPI = (baseURL = 'http://someURL.com') => {
+const createAPI = (baseURL = 'http://somebase.com/') => {
   //  STEP 1: Create and configure an apisauce-based api object.
   const api = create({
     baseURL,    // base URL is read from the "constructor"
