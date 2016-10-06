@@ -1,4 +1,5 @@
-# _React Boilerplate_:  Full-Stack REACT & Redux App
+# _React Boilerplate_:  
+Full-Stack REACT & Redux App
 <!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
 
 ##### Created: 6 October 2016
@@ -7,7 +8,7 @@
   * Focuses on outsourcing API calls with _apisauce_.
   * Uses _redux-sagas_ to call customized api methods.
   * Uses _redux-logger_ to allow for informative workflow from the devtools console.  
-  * Uses _redux dev tools extension_ to allow for a macro perspective picture of your current store's state.
+  * Uses _redux-devtools-extension_ to allow for a macro perspective picture of your current store's state.
   * Airbnb Style Guide implemented.
 
 #### Setup:
