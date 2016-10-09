@@ -1,9 +1,7 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import Actions, { ThingTypes } from '../Redux/ThingRedux';
-import API from '../Store/API';
-// import Actions from '../Redux/ThingRedux';
-console.log('ThingTypes: ', ThingTypes, 'Actions: ', Actions);
+import API from '../Services/API';
 
 // worker saga
 function* worker(action) {
