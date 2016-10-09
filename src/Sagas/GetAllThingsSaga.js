@@ -3,9 +3,9 @@ import { takeEvery } from 'redux-saga';    // fires a worker function for every 
 import Actions, { ThingTypes } from '../Redux/ThingRedux';
 import API from '../Services/API';
 
-// TODO: add getAll to API methods.
+// TODO: add getAllThings to API methods.
 function* worker() {
-  const things = yield API.getAll();
+  const things = yield API.getAllThings();
   yield put(Actions.getAllThingsSuccess(things));
 }
 
