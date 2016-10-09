@@ -1,8 +1,7 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import API from '../API';
-import Actions from '../Actions/Creators';
-import Types from '../Actions/Types';
+import Actions, { ThingTypes } from '../Redux/ThingRedux';
 
 function* worker(action) {
   const newThing = yield API.editOne(action.editedThing);
@@ -11,7 +10,7 @@ function* worker(action) {
 
 function* watcher() {
   for (;;) {
-    yield* takeEvery(Types.EDIT_THING, worker);
+    yield* takeEvery(ThingTypes.EDIT_THING, worker);
   }
 }
 
