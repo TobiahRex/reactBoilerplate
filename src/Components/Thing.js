@@ -3,30 +3,40 @@ import OneFieldForm from './OneFieldForm';
 
 class Thing extends React.Component {
   constructor(props) {
-    super(props);  // "super" calls the constructor of the parent class.
+    super(props);
     this.state = {
       isEditing: false,
     };
+    this.editButtonHandler = this.editButtonHandler.bind(this);
+    this.confirmButtonHandler = this.confirmButtonHandler.bind(this);
+    this.cancelButtonHandler = this.cancelButtonHandler.bind(this);
+    this.removeButtonHandler = this.removeButtonHandler.bind(this);
   }
 
   editButtonHandler() {
-    this.setState({ isEditing: true });
+    this.setState({
+      isEditing: true,
+    });
   }
 
-  confirmButtonHandler(newThingName) {
-    const newThing = Object.assign({}, this.props.data);
-    newThing.name = newThingName;
-    this.props.editThing(newThing);
-    this.setState({ isEditing: false });
+  confirmButtonHandler(newThing) {
+    const thingToEdit = Object.assign({}, this.props.data, newThing);
+    this.props.editThing(thingToEdit);
+    this.setState({
+      isEditing: false,
+    });
   }
 
   cancelButtonHandler() {
-    this.setState({ isEditing: false });
+    this.setState({
+      isEditing: false,
+    });
   }
 
   removeButtonHandler() {
     this.props.removeThing(this.props.data._id);
   }
+
 
   render() {
     const buttons = this.state.isEditing ?
@@ -39,6 +49,7 @@ class Thing extends React.Component {
           Remove
         </button>
       </div>);
+
     const value = this.state.isEditing ?
       <OneFieldForm
         handleSubmit={this.confirmButtonHandler}
@@ -48,6 +59,7 @@ class Thing extends React.Component {
         required
       />
       : this.props.data.name;
+
     return (
       <div>
         <div>
@@ -59,6 +71,7 @@ class Thing extends React.Component {
           </span>
           {buttons}
         </div>
+
       </div>
     );
   }
