@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';    // fires a worker function for every matching dispatched action.
 import Types from '../Actions/Types';
-import Actions from '../Actions/Creators';
+import Actions from '../Redux/ThingRedux';
 import API from '../API';
 
 function* worker() {
