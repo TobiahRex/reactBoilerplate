@@ -14,6 +14,7 @@ const { Types, Creators } = createActions({
 });
 
 export const ThingTypes = Types;
+
 export default Creators;
 
 export const INITIAL_STATE = [];

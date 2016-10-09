@@ -1,8 +1,9 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import Types from '../Actions/Types';
-import Actions from '../Actions/Creators';
+import Actions, { ThingTypes } from '../Redux/ThingRedux';
 import API from '../Store/API';
+// import Actions from '../Redux/ThingRedux';
+console.log('ThingTypes: ', ThingTypes, 'Actions: ', Actions);
 
 // worker saga
 function* worker(action) {
@@ -13,7 +14,7 @@ function* worker(action) {
 // watcher saga can be named to anything.
 function* watcher() {
   for (;;) {
-    yield* takeEvery(Types.REMOVE_THING, worker);
+    yield* takeEvery(ThingTypes.REMOVE_THING, worker);
   }
 }
 
