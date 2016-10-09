@@ -18,10 +18,8 @@ class OneFieldForm extends React.Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    this.props.handleSubmit(this.state.value);
-    this.setState({
-      value: '',
-    });
+    this.props.createThing(this.state.value);
+    this.setState({ value: '' });
   }
 
   render() {
@@ -50,7 +48,7 @@ class OneFieldForm extends React.Component {
 }
 
 OneFieldForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
+  createThing: PropTypes.func.isRequired,
   buttonText: PropTypes.string.isRequired,
   handleCancel: PropTypes.func,
   cancelText: PropTypes.string,

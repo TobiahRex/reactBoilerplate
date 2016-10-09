@@ -7,6 +7,12 @@ class Thing extends React.Component {
     this.state = {
       isEditing: false,
     };
+    this.formProps = {
+      handleSubmit: this.confirmButtonHandler,
+      handleCancel: this.cancelButtonHandler,
+      buttonText: 'OK',
+      defaultValue: this.props.data.name,
+    }
     this.editButtonHandler = this.editButtonHandler.bind(this);
     this.confirmButtonHandler = this.confirmButtonHandler.bind(this);
     this.cancelButtonHandler = this.cancelButtonHandler.bind(this);
@@ -51,13 +57,7 @@ class Thing extends React.Component {
       </div>);
 
     const value = this.state.isEditing ?
-      <OneFieldForm
-        handleSubmit={this.confirmButtonHandler}
-        handleCancel={this.cancelButtonHandler}
-        buttonText="OK"
-        defaultValue={this.props.data.name}
-        required
-      />
+      <OneFieldForm {...this.formProps} required />
       : this.props.data.name;
 
     return (

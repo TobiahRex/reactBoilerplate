@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Actions from '../Actions/Creators';
+// import Actions from '../Actions/Creators';
+import Actions from '../Redux/ThingRedux';
 import ThingList from './ThingList';
 import OneFieldForm from './OneFieldForm';
 
@@ -17,7 +18,6 @@ const Things = ({ createThing, editThing, removeThing, things }) => {
     <OneFieldForm {...formProps} buttonText="Add" required />
   </div>);
 };
-
 
 const mapStateToProps = state => ({
   things: state.things,
