@@ -13,7 +13,7 @@ const Things = ({ createThing, editThing, removeThing, things }) => {
   const formProps = { createThing };
 
   /* NOTE: createThing does not work ?
-  Changed the prop on OnField form to "create thing" from "handleSubmit" -
+  Changed the prop on OnField form to "createThing" from "handleSubmit" -
   If submiting a creating a new thing does not work, start troubleshooting here.
   */
 
