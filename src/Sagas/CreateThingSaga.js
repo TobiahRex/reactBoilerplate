@@ -1,11 +1,9 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import Types from '../Actions/Types';
-import Actions from '../Redux/ThingRedux';
+import Actions, { ThingTypes } from '../Redux/ThingRedux';
 import API from '../Services/API';
 
 function* worker(action) {
-  console.log('action: ', action);
   const thingToAdd = { name: action.thingName };
   const addedThing = yield API.addOne(thingToAdd);
   yield put(Actions.createThingSuccess(addedThing));
@@ -13,7 +11,7 @@ function* worker(action) {
 
 function* watcher() {
   for (;;) {
-    yield* takeEvery(Types.CREATE_THING, worker);
+    yield* takeEvery(ThingTypes.CREATE_THING, worker);
   }
 }
 
