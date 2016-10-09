@@ -2,12 +2,12 @@ import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import Types from '../Actions/Types';
 import Actions from '../Actions/Creators';
-import API from '../API';
+import API from '../Services/API';
 
 function* worker(action) {
+  console.log('action: ', action);
   const thingToAdd = { name: action.thingName };
   const addedThing = yield API.addOne(thingToAdd);
-  console.log('addedThing: ', addedThing);
   yield put(Actions.createThingSuccess(addedThing));
 }
 

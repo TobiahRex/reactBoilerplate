@@ -17,9 +17,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeThing: (thingId) => {
-    dispatch(Actions.removeThing(thingId));
-  },
+  removeThing: thingId => dispatch(Actions.removeThing(thingId)),
   createThing: (thingName) => {
     dispatch(Actions.createThing(thingName));
   },
