@@ -1,18 +1,16 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';    // fires a worker function for every matching dispatched action.
-import Types from '../Actions/Types';
-import Actions from '../Redux/ThingRedux';
+import Actions, { ThingTypes } from '../Redux/ThingRedux';
 import API from '../API';
 
 function* worker() {
   const things = yield API.getAll();
-  console.log('things: ', things);
   yield put(Actions.getAllThingsSuccess(things));
 }
 
 function* watcher() {
   for (;;) {
-    yield* takeEvery(Types.GET_ALL_THINGS, worker);
+    yield* takeEvery(ThingTypes.GET_ALL_THINGS, worker);
   }
 }
 
