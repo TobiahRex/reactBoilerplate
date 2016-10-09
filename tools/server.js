@@ -17,6 +17,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use((req, res, next) => {
+  res.hande = (err, data) => res.status(err ? 400 : 200).send(err || data);
+  next();
+});
 
 if (BUILD === 'development') {
   const webpack = require('webpack');
