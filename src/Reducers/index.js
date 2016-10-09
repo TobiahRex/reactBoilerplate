@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import configureStore from '../Store/configureStore';
-import rootSaga from '../Sagas/'
+import rootSaga from '../Sagas/';
 import things from './ThingReducer';
 
 // const appReducer = combineReducers({
@@ -17,4 +17,4 @@ export default () => {
     things,
   });
   return configureStore(rootReducer, rootSaga);
-}
+};
