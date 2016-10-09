@@ -7,6 +7,7 @@ import API from '../API';
 function* worker(action) {
   const thingToAdd = { name: action.thingName };
   const addedThing = yield API.addOne(thingToAdd);
+  console.log('addedThing: ', addedThing);
   yield put(Actions.createThingSuccess(addedThing));
 }
 

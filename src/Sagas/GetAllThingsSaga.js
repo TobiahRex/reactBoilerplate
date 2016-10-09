@@ -6,6 +6,7 @@ import API from '../API';
 
 function* worker() {
   const things = yield API.getAll();
+  console.log('things: ', things);
   yield put(Actions.getAllThingsSuccess(things));
 }
 

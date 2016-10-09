@@ -7,7 +7,10 @@ API.getAll = () =>
   get({
     url: '/api/things',
   })
-  .then(res => res)
+  .then(res => {
+    console.log('res: ', res);
+    return res;
+  })
   .catch(toastr.warning);
 
 API.addOne = thing =>

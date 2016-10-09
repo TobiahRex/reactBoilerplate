@@ -46,12 +46,11 @@ app.get('*', (req, res) => {
   } else {
     indexFile = path.join(__dirname, './index.html');
   }
-  console.log('📁 indexFile =  ', indexFile);
+  console.log('📁 indexFile = ', indexFile);
   res.sendFile(indexFile);
 });
 app.listen(PORT, (err) => {
-  console.log(err || `==> 📡 Server @ ${PORT}
-  ===> 🛠 BUILD = ${BUILD}`);
+  console.log(err || `==> 📡 Server @ ${PORT} 🛠 BUILD = ${BUILD}`);
 });
 
 mongoose.connect(MONGO, err => console.log(err || `==> 📜 MONGO @ ${MONGO}`));
