@@ -15,7 +15,7 @@ const BUILD = process.env.NODE_ENV || 'development';
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 if (BUILD === 'development') {
@@ -42,12 +42,12 @@ app.get('*', (req, res) => {
   } else {
     indexFile = path.join(__dirname, './index.html');
   }
-  console.log('indexFile: ', indexFile);
+  console.log('📁 indexFile =  ', indexFile);
   res.sendFile(indexFile);
 });
 app.listen(PORT, (err) => {
-  console.log(err || `server started port ${PORT}
-  BUILD = ${BUILD}`);
+  console.log(err || `==> 📡 Server @ ${PORT}
+  ===> 🛠 BUILD = ${BUILD}`);
 });
 
-mongoose.connect(MONGO, err => console.log(err || `MONGO @ ${MONGO}`));
+mongoose.connect(MONGO, err => console.log(err || `==> 📜 MONGO @ ${MONGO}`));

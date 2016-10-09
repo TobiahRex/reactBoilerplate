@@ -11,13 +11,11 @@ const createAPI = (baseURL = 'http://somebase.com/') => {
       'Cache-Control': 'no-cache',
     },
   });
-
   /* STEP 2: Assign API key to all requests (if desired)
   // ---------- Example: Force OpenWeather API Key on all requests
   api.addRequestTransform((request) => {
   const reqObj = request;
   reqObj.params.APPID = '0e44183e8d1018fc92eb3307d885379c';  });
-
   */
 
   /* STEP 3: Add development notification of response object. (if desired)
@@ -39,6 +37,12 @@ const createAPI = (baseURL = 'http://somebase.com/') => {
 
   Since we can't hide from that,
   we embrace it by getting out of the way at this level.
+
+  in the below example, the 'weather' will be added to the end of the base url.
+  So the base URL is equal to http://somebase.com/weather
+
+  the object we pass in, is that params object for the get method.
+  It will be added as `http://somebase.com/weather?q=${city}`
   */
   const getCity = city => api.get('weather', { q: city });
 

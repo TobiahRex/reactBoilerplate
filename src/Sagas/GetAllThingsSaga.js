@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import { takeEvery } from 'redux-saga';    // fires a worker function for every matching dispatched action.
 import Types from '../Actions/Types';
 import Actions from '../Actions/Creators';
 import API from '../API';

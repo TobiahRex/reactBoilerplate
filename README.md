@@ -1,5 +1,5 @@
 # _React Boilerplate: Full-Stack_
-Full-Stack REACT & Redux App - Created: 6 October 2016
+Full-Stack REACT & Redux - Created: 6 October 2016
 <!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
 
 ## DESCRIPTION:
@@ -14,10 +14,11 @@ Cannibalized from Templates and Boilerplates from around the web.
   - `npm install`
   - `npm start` for development server
   - `npm build` for production server
-#####NOTE) Highly recommend running npm update --save to update package json before running "npm start" or "npm build".
+
+  NOTE: I Highly recommend running npm update --save to update package json before running "npm start" or "npm build".
 
 ## NOTE on Reducers:
- - This bp's Redux reducer methods rely on the developer to customize the logic to maintain immutability of state. This was done _intentionally_ to strengthen developers abilities in manipulating state.  (If this feels cumbersome, I highly recommend using _redux-sauce_ & _seamless-immutable_ to outsource this process in a very clean, and simple way).
+ This bp's Redux reducer methods rely on the developer to customize the logic to maintain immutability of state. This was done _intentionally_ to strengthen developers abilities in manipulating state.  If this feels cumbersome, I highly recommend using _redux-sauce_ & _seamless-immutable_ (refs below) to outsource this process in a very clean, and simple way.
 
 ## Helper Libraries:
 * [apisauce](https://github.com/skellock/apisauce)
