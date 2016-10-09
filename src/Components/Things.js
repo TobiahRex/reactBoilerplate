@@ -4,12 +4,19 @@ import Actions from '../Actions/Creators';
 import ThingList from './ThingList';
 import OneFieldForm from './OneFieldForm';
 
-const Things = ({ createThing, editThing, removeThing, things }) => (
-  <div>
-    <ThingList things={things} removeThing={removeThing} editThing={editThing} />
-    <OneFieldForm handleSubmit={createThing} buttonText="Add" required />
-  </div>
-);
+const Things = ({ createThing, editThing, removeThing, things }) => {
+  const thingProps = {
+    editThing,
+    removeThing,
+    things,
+  };
+  const formProps = { createThing };
+
+  return (<div>
+    <ThingList {...thingProps} />
+    <OneFieldForm {...formProps} buttonText="Add" required />
+  </div>);
+};
 
 
 const mapStateToProps = state => ({
