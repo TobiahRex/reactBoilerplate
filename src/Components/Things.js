@@ -18,12 +18,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   removeThing: thingId => dispatch(Actions.removeThing(thingId)),
-  createThing: (thingName) => {
-    dispatch(Actions.createThing(thingName));
-  },
-  editThing: (newThing) => {
-    dispatch(Actions.editThing(newThing));
-  },
+  createThing: thingName => dispatch(Actions.createThing(thingName)),
+  editThing: newThing => dispatch(Actions.editThing(newThing)),
 });
 
 Things.propTypes = {
