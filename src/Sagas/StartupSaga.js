@@ -1,7 +1,6 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import Types from '../Actions/Types';
-import Actions from '../Actions/Creators';
+import Actions, { ThingTypes } from '../Redux/ThingRedux';
 
 function* worker() {
   yield put(Actions.getAllThings());
@@ -9,7 +8,7 @@ function* worker() {
 
 function* watcher() {
   for (;;) {
-    yield* takeEvery(Types.APP_STARTUP, worker);
+    yield* takeEvery(ThingTypes.APP_STARTUP, worker);
   }
 }
 
