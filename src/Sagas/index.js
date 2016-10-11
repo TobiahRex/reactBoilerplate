@@ -9,8 +9,7 @@ import { ThingTypes } from '../Redux/ThingRedux';
 
 const api = API.createAPI();
 
-console.log('process.env.DEV: ', process.env.DEV);
-
 export default function* rootSaga() {
-  yield [takeLatest(ThingTypes.GET_ALL_THINGS, getAllThings, api)];
+  yield [takeLatest(ThingTypes.GET_ALL_THINGS, getAllThings, api),
+  takeLatest(ThingTypes.)];
 }
