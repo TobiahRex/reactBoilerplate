@@ -76,6 +76,7 @@
     "request": "^2.75.0",
     "style-loader": "^0.13.1",
     "toastr": "^2.1.2",
-    "transform-loader": "^0.2.3"
+    "transform-loader": "^0.2.3",
+    "uuid": "^2.0.3"
   }
 }
