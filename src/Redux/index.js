@@ -6,7 +6,7 @@ import { thingReducer } from '../Redux/ThingRedux';
 export default () => {
   const things = thingReducer;
   const rootReducer = combineReducers({
-    things,
+    things
   });
   return configureStore(rootReducer, rootSaga);
 };
