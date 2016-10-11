@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 
 if (BUILD === 'development') {
   require('dotenv').load();
+  process.env.DEV = 'development'
   const webpack = require('webpack');
   const hotMiddleware = require('webpack-hot-middleware');
   const devMiddleware = require('webpack-dev-middleware');
