@@ -22,6 +22,11 @@ const devConfig = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'TEST_GLOBAL': JSON.stringify(process.env.TEST_GLOBAL),
+      },
+    }),
   ],
   module: {
     loaders: [

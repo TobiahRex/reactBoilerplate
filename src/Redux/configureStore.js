@@ -2,11 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import createLogger from 'redux-logger';
 import Actions from '../Redux/ThingRedux';
-import rootReducer from '../Reducers/';
-import sagas from '../Sagas/';
 
-
-export default () => {
+export default (rootReducer, rootSaga) => {
   const enhancers = [];
   const middlewares = [];
 
@@ -20,8 +17,7 @@ export default () => {
   );
 
   const store = createStore(rootReducer, compose(...enhancers));
-
-  sagaMiddleware.run(sagas);
+  sagaMiddleware.run(rootSaga);
 
   store.dispatch(Actions.getAllThings());
 

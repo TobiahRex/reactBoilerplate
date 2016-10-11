@@ -1,14 +1,14 @@
-import { fork } from 'redux-saga/effects';
-import Startup from './StartupSaga';
-import GetAllThings from './GetAllThingsSaga';
-import CreateThing from './CreateThingSaga';
-import EditThing from './EditThingSaga';
-import RemoveThing from './RemoveThingSaga';
+import { takeLatest } from 'redux-saga';
+import { getAllThings } from './GetAllThingsSaga';
+// import Startup from './StartupSaga';
+// import CreateThing from './CreateThingSaga';
+// import EditThing from './EditThingSaga';
+// import RemoveThing from './RemoveThingSaga';
+import API from '../Services/API';
+import { ThingTypes } from '../Redux/ThingRedux';
+
+const api = API.createAPI();
 
 export default function* rootSaga() {
-  yield [fork(Startup),
-    fork(GetAllThings),
-    fork(CreateThing),
-    fork(EditThing),
-    fork(RemoveThing)]
+  yield [takeLatest(ThingTypes.GET_ALL_THINGS, getAllThings, api)];
 }

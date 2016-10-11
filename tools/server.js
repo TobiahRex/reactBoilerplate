@@ -23,14 +23,14 @@ app.use((req, res, next) => {
   next();
 });
 
-
 if (BUILD === 'development') {
+  require('dotenv').load();
   const webpack = require('webpack');
   const hotMiddleware = require('webpack-hot-middleware');
   const devMiddleware = require('webpack-dev-middleware');
   const config = require('../webpack.config');
-
   const compiler = webpack(config);
+
   app.use(hotMiddleware(compiler));
   app.use(devMiddleware(
     compiler,

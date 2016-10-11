@@ -45,6 +45,10 @@ const createAPI = (baseURL = 'http://localhost:3000/') => {
   It will be added as `http://somebase.com/weather?q=${city}`
   */
   const getCity = city => api.get('weather', { q: city });
+  const getAllThings = () => api.get('api/things');
+  const createThing = (thing) => api.get('api/things', { thing });
+
+
 
   /* STEP 5 Return back an obj of methods...
   These will be considered our "api interface".
@@ -55,7 +59,7 @@ const createAPI = (baseURL = 'http://localhost:3000/') => {
   This is one way to create truly private scoped goodies in JavaScript.
   */
   return {
-    getCity,  // a list of the API functions from step 4
+    getAllThings,  // a list of the API functions from step 4
   };
 };
 

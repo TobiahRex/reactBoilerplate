@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import configureStore from '../Store/configureStore';
+import configureStore from './configureStore';
 import rootSaga from '../Sagas/';
 import { thingReducer } from '../Redux/ThingRedux';
 
