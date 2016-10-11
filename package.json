@@ -6,7 +6,7 @@
   "repository": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "if test \"$NODE_ENV\" = \"production\" ; then npm run start-prod; else npm run start-dev; fi ",
+    "start": "npm run start-prod; else npm run start-dev; fi ",
     "start-prod": "babel-node server.js",
     "start-dev": "npm-run-all --parallel lint:watch open:dev",
     "open:dev": "babel-node tools/server.js",

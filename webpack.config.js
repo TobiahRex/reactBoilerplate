@@ -24,6 +24,7 @@ const devConfig = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'TEST_GLOBAL': JSON.stringify(process.env.TEST_GLOBAL),
       },
     }),
