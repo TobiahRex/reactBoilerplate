@@ -10,7 +10,10 @@ router.route('/:thingId')
   .delete((req, res) => Thing.findByIdAndRemove(req.params.thingId, res.handle));
 
 router.route('/')
-  .get((req, res) => Thing.find({}, res.handle))
+  .get((req, res) => {
+    console.log('hello from /api/things/');
+    Thing.find({}, res.handle)
+  })
   .post((req, res) => Thing.create(req.body, res.handle));
 
 module.exports = router;

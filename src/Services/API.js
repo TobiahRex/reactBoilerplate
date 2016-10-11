@@ -3,7 +3,7 @@ import { create } from 'apisauce';
 
 
 // our "constructor"
-const createAPI = (baseURL = 'http://localhost:3000/') => {
+const createAPI = (baseURL = 'http://localhost:3001/') => {
   //  STEP 1: Create and configure an apisauce-based api object.
   const api = create({
     baseURL,    // base URL is read from the "constructor"
@@ -45,7 +45,7 @@ const createAPI = (baseURL = 'http://localhost:3000/') => {
   It will be added as `http://somebase.com/weather?q=${city}`
   */
   const getCity = city => api.get('weather', { q: city });
-  const getAllThings = () => api.get('api/things');
+  const getAllThings = () => api.get('api/things/');
   const createThing = (thing) => api.get('api/things', { thing });
 
 

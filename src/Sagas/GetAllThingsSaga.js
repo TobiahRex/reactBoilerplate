@@ -3,8 +3,7 @@ import Actions from '../Redux/ThingRedux';
 // import API from '../Services/API';
 
 // TODO: add getAllThings to API methods.
-export function* getAllThings(api, action) {
-
+export function* getAllThings(api) {
   const response = yield call(api.getAllThings);
 
   if (response.ok) {
