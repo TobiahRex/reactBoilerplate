@@ -1,19 +1,15 @@
-import { put } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import Actions, { ThingTypes } from '../Redux/ThingRedux';
-import API from '../Services/API';
+import toastr from 'toastr';
+import { call, put } from 'redux-saga/effects';
+import Actions from '../Redux/ThingRedux';
 
-// TODO: add removeOne to API methods.
+export default function* removeThing(api, action) {
+  const response = yield call(() => api.removeOne(action.thingId));
 
-function* worker(action) {
-  const removedThing = yield API.removeOne(action.thingId);
-  yield put(Actions.removeThingSuccess(removedThing));
-}
-
-function* watcher() {
-  for (;;) {
-    yield* takeEvery(ThingTypes.REMOVE_THING, worker);
+  if (response.ok) {
+    toastr.success('API Success!');
+    yield put(Actions.removeThingSuccess(response.data));
+  } else {
+    toastr.error(response.problem, 'API Error.');
+    throw new Error('API Problem', response.problem);
   }
 }
-
-export default watcher;

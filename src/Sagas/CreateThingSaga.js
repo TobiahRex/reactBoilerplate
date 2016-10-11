@@ -1,5 +1,5 @@
 import toastr from 'toastr';
-import { put, call } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import Actions from '../Redux/ThingRedux';
 
 export default function* createThing(api, action) {
