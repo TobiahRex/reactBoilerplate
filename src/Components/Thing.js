@@ -10,7 +10,7 @@ export default class Thing extends Component {
       edit: false,
     };
 
-    this.endableEdit = this.enableEdit.bind(this);
+    this.enableEdit = this.enableEdit.bind(this);
     this.submitEdit = this.submitEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.removeThing = this.removeThing.bind(this);
@@ -28,7 +28,7 @@ export default class Thing extends Component {
   }
 
   submitEdit() {
-    const { newThing } = this.state.data;
+    const newThing = this.state.data;
     newThing.name = this.state.newName;
 
     this.props.editThing(newThing);
@@ -49,8 +49,8 @@ export default class Thing extends Component {
     const buttonSet = this.state.edit ?
       <div>
         <input onChange={e => this.onInputChange(e)} value={this.state.newName} />
-        <button submitThing={this.submitEdit} type="submit">Submit</button>
-        <button cancelEdit={this.cancelEdit} type="submit">Cancel</button>
+        <button onClick={this.submitEdit} type="submit">Submit</button>
+        <button onClick={this.cancelEdit} type="submit">Cancel</button>
       </div>
     :
       <div>
