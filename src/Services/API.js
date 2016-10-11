@@ -13,17 +13,15 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   api.addRequestTransform((request) => {
   const reqObj = request;
   reqObj.params.APPID = '0e44183e8d1018fc92eb3307d885379c';  });
-  */
 
-  /* STEP 3: Add development notification of response object. (if desired)
+  STEP 3: Add development notification of response object. (if desired)
   const BUILD = process.env.NODE || 'development';
   if (BUILD === 'development') {
     const monitor = response => console.info('API RESPONSE: ', response);
     api.addMonitor(monitor);
   }
-  */
 
-  /* STEP 4:  Create API methods...
+  STEP 4:  Create API methods...
   Define some functions that call the api.
   The goal is to provide a thin wrapper of the api layer
   by providing nicer feeling functions
@@ -45,10 +43,7 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   const getAllThings = () => api.get('api/things/');
   const createThing = thing => api.post('api/things', { name: thing.name });
   const removeThing = id => api.delete(`api/things/${id}`);
-  const editThing = thing => {
-    console.log('edit thing: ', thing);
-    return api.put(`api/things/${thing.id}`, { name: thing.name })
-  };
+  const editThing = thing => api.put(`api/things/${thing._id}`, { name: thing.name });
 
   /* STEP 5 Return back an obj of methods...
   These will be considered our "api interface".
@@ -58,11 +53,11 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   That's because it is scoped privately.
   This is one way to create truly private scoped goodies in JavaScript.
   */
-  return {
-    getAllThings,  // a list of the API functions from step 4
+  return { // a list of the API functions from step 4
+    getAllThings,
     createThing,
     removeThing,
-    editThing
+    editThing,
   };
 };
 
