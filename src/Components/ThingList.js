@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Thing from './Thing';
 import uuid from 'uuid';
 
 const ThingList = ({ removeThing, editThing, things }) => {
