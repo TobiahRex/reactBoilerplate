@@ -1,20 +1,14 @@
-import { put } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import Actions, { ThingTypes } from '../Redux/ThingRedux';
-import API from '../Services/API';
+import { put, call } from 'redux-saga/effects';
+import Actions from '../Redux/ThingRedux';
 
-// TODO: create addOne method to API;
-
-function* worker(action) {
+export default function* createThing(api, action) {
+  console.log('api: ', api, 'action: ', action);
   const thingToAdd = { name: action.thingName };
-  const addedThing = yield API.addOne(thingToAdd);
-  yield put(Actions.createThingSuccess(addedThing));
-}
+  const response = yield call(api.addOne(thingToAdd));
 
-function* watcher() {
-  for (;;) {
-    yield* takeEvery(ThingTypes.CREATE_THING, worker);
+  if (response.ok) {
+    yield put(Actions.createThingSuccess(response.data));
+  } else {
+    throw new Error('API Error: ', response.problem);
   }
 }
-
-export default watcher;
