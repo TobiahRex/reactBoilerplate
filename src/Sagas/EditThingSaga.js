@@ -5,15 +5,7 @@ import API from '../Services/API';
 
 // TODO: add editOne method to API methods.
 
-function* worker(action) {
+export default function* worker(action) {
   const newThing = yield API.editOne(action.editedThing);
   yield put(Actions.editThingSuccess(newThing));
 }
-
-function* watcher() {
-  for (;;) {
-    yield* takeEvery(ThingTypes.EDIT_THING, worker);
-  }
-}
-
-export default watcher;

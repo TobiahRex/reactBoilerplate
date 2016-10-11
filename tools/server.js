@@ -19,13 +19,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use((req, res, next) => {
-  res.handle = (err, data) => res.status(err ? 400 : 200).send(err || data);
+  res.handle = (err, data) => {
+    console.log('Response Error: ', err, '\nResponse Data: ', data);
+    res.status(err ? 400 : 200).send(err || data);
+  };
   next();
 });
 
 if (BUILD === 'development') {
   require('dotenv').load();
-  process.env.DEV = 'development'
+  process.env.DEV = 'development';
   const webpack = require('webpack');
   const hotMiddleware = require('webpack-hot-middleware');
   const devMiddleware = require('webpack-dev-middleware');

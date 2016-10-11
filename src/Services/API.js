@@ -1,8 +1,5 @@
 import { create } from 'apisauce';
-// a library to wrap and simplify api calls
 
-
-// our "constructor"
 const createAPI = (baseURL = 'http://localhost:3001/') => {
   //  STEP 1: Create and configure an apisauce-based api object.
   const api = create({
@@ -44,11 +41,11 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   the object we pass in, is that params object for the get method.
   It will be added as `http://somebase.com/weather?q=${city}`
   */
-  const getCity = city => api.get('weather', { q: city });
+  // const getCity = city => api.get('weather', { q: city });
   const getAllThings = () => api.get('api/things/');
-  const createThing = (thing) => api.get('api/things', { thing });
-
-
+  const createThing = thing => api.post('api/things', { name: thing.name });
+  const removeThing = id => api.delete(`api/thing/${id}`);
+  const editThing = thing => api.put(`api/thing/${thing.id}`, { name: thing.name });
 
   /* STEP 5 Return back an obj of methods...
   These will be considered our "api interface".
@@ -61,6 +58,8 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   return {
     getAllThings,  // a list of the API functions from step 4
     createThing,
+    removeThing,
+    editThing
   };
 };
 
