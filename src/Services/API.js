@@ -60,6 +60,7 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   */
   return {
     getAllThings,  // a list of the API functions from step 4
+    createThing,
   };
 };
 
