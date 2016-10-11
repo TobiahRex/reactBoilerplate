@@ -2,9 +2,10 @@ import toastr from 'toastr';
 import { call, put } from 'redux-saga/effects';
 import Actions from '../Redux/ThingRedux';
 
-export default function* removeThing(api, action) {
-  const response = yield call(() => api.removeOne(action.thingId));
-
+export default function* remove(api, action) {
+  const response = yield call(() => api.removeThing(action.thingId));
+  console.log('remove response: ', response);
+  
   if (response.ok) {
     toastr.success('API Success!');
     yield put(Actions.removeThingSuccess(response.data));

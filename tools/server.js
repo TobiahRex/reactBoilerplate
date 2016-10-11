@@ -7,8 +7,6 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
-const api = require('./api');
-
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
@@ -45,7 +43,7 @@ if (BUILD === 'development') {
   );
 }
 
-app.use('/api', api);
+app.use('/api', require('./api'));
 app.get('*', (req, res) => {
   let indexFile;
   if (BUILD === 'development') {

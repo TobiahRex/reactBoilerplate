@@ -44,8 +44,14 @@ const createAPI = (baseURL = 'http://localhost:3001/') => {
   // const getCity = city => api.get('weather', { q: city });
   const getAllThings = () => api.get('api/things/');
   const createThing = thing => api.post('api/things', { name: thing.name });
-  const removeThing = id => api.delete(`api/thing/${id}`);
-  const editThing = thing => api.put(`api/thing/${thing.id}`, { name: thing.name });
+  const removeThing = id => {
+    console.log('remove id: ', id);
+    api.delete(`api/things/${id}`)
+  };
+  const editThing = thing => {
+    console.log('edit thing: ', thing);
+    api.put(`api/things/${thing.id}`, { name: thing.name })
+  };
 
   /* STEP 5 Return back an obj of methods...
   These will be considered our "api interface".
