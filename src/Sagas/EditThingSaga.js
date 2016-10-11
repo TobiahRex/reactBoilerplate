@@ -1,11 +1,15 @@
-import { put } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
-import Actions, { ThingTypes } from '../Redux/ThingRedux';
-import API from '../Services/API';
+import toastr from 'toastr';
+import { call, put } from 'redux-saga/effects';
+import Actions from '../Redux/ThingRedux';
 
-// TODO: add editOne method to API methods.
+export default function* editThing(action, api) {
+  const response = yield call(() => api.editThing(action.editedThing));
 
-export default function* worker(action) {
-  const newThing = yield API.editOne(action.editedThing);
-  yield put(Actions.editThingSuccess(newThing));
+  if (response.ok) {
+    toastr.success('API Success!');
+    yield put(Actions.editThingSuccess(response.data));
+  } else {
+    toastr.error(response.problem, 'API Error');
+    throw new Error('API Error: ', response.problem);
+  }
 }
