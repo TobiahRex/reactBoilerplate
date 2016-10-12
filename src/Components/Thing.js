@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import uuid from 'uuid';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
+import { TextField, RaisedButton } from 'material-ui';
 import styles from './Styles/ThingStyles';
 
 export default class Thing extends Component {
@@ -14,22 +13,9 @@ export default class Thing extends Component {
       edit: false,
     };
 
-    this.enableEdit = this.enableEdit.bind(this);
     this.submitEdit = this.submitEdit.bind(this);
-    this.cancelEdit = this.cancelEdit.bind(this);
     this.submitGroup = this.submitGroup.bind(this);
     this.editGroup = this.editGroup.bind(this);
-  }
-
-  onInputChange(e) {
-    this.setState({ newName: e.target.value });
-  }
-
-  cancelEdit() {
-    this.setState({
-      edit: false,
-      data: this.props.data,
-    });
   }
 
   submitEdit() {
@@ -40,15 +26,11 @@ export default class Thing extends Component {
     this.setState({ newName: '', data: {} });
   }
 
-  enableEdit() {
-    this.setState({ edit: true });
-  }
-
   submitGroup() {
     const PROPS = {
       tf: {
         id: uuid(),
-        onChange: e => this.onInputChange(e),
+        onChange: e => this.setState({ newName: e.target.value }),
         value: this.state.newName,
       },
       rb1: {
@@ -59,7 +41,10 @@ export default class Thing extends Component {
         primary: true,
       },
       rb2: {
-        onClick: this.cancelEdit,
+        onClick: () => this.setState({
+          edit: false,
+          data: this.props.data,
+        }),
         type: "button",
         label: "Cancel",
         style: styles.btnMargin,
@@ -84,7 +69,7 @@ export default class Thing extends Component {
         disabled: true,
       },
       rb1: {
-        onClick: this.enableEdit,
+        onClick: () => this.setState({ edit: true }),
         type: "button",
         label: "Edit",
         style: styles.lftMargin,
