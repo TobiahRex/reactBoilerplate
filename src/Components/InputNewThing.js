@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import TextField from 'material-ui/TextField';
 
 export default class InputNewThing extends Component {
   constructor(props) {
@@ -9,7 +10,9 @@ export default class InputNewThing extends Component {
     };
 
     this.inputProps = {
-      type: 'text',
+      hintText: "Thing Name",
+      type: "text",
+      floatingLabelText: "New Name Input",
       onChange: e => this.onInputChange(e),
     };
 
@@ -35,12 +38,13 @@ export default class InputNewThing extends Component {
   render() {
     return (<div>
       <form onSubmit={this.submitNewThing}>
-        <input value={this.state.newData} {...this.inputProps} required />
+        <TextField {...this.inputProps} required />
         <button type="submit">ADD</button>
         <button onClick={this.clearInput} type="buttom">CLEAR</button>
       </form>
     </div>);
   }
 }
+// <input value={this.state.newData} {...this.inputProps} required />
 
 InputNewThing.propTypes = { createThing: PropTypes.func.isRequired };

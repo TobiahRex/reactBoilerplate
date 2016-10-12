@@ -50,10 +50,6 @@ export default class Thing extends Component {
     // this.props = data, editThing, removeThing
     const buttonSet = this.state.edit ?
     <div>
-      <TextField
-        hintText="Thing Name"
-        floatingLabelText={this.state.newName}
-        />
       <input onChange={e => this.onInputChange(e)} value={this.state.newName} />
       <RaisedButton label="Default">Hi</RaisedButton>
       <button onClick={this.submitEdit} type="submit">Submit</button>
@@ -61,10 +57,7 @@ export default class Thing extends Component {
     </div>
     :
     <div>
-      <TextField
-        hintText="Thing Name"
-        floatingLabelText={this.state.data.newName}
-        />
+      <input onChange={e => this.onInputChange(e)} value={this.state.data.name} />
       <RaisedButton label="Default" />
       <button onClick={this.enableEdit} type="buttom">Edit</button>
       <button onClick={() => this.removeThing(this.props.data._id)} type="buttom">Remove</button>
