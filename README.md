@@ -4,11 +4,12 @@ Full-Stack REACT & Redux - Created: 6 October 2016
 
 ## DESCRIPTION:
 Cannibalized from Templates and Boilerplates from around the web.
-  * Focuses on outsourcing API calls with _apisauce_.
+  * Uses _apisauce_ for API calls. See API README.md for details.
   * Uses _redux-sagas_ to call customized api methods.
   * Uses _redux_sauce_ to create Types, Creators & Reducer.
   * Uses _redux-logger_ to allow for informative workflow from the devtools console.  
   * Uses _redux-devtools-extension_ to allow for a macro perspective picture of your current store's state.
+  * Configured for front end environment variables using webpack.DefinePlugin().
   * Airbnb Style Guide implemented.
 
 ## Setup:

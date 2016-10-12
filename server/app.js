@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
 const app = express();
+const api = require('./api');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -33,7 +34,6 @@ if (BUILD === 'development') {
   const config = require('../webpack.config');
   const compiler = webpack(config);
 
-  app.use(hotMiddleware(compiler));
   app.use(devMiddleware(
     compiler,
     {
@@ -41,9 +41,10 @@ if (BUILD === 'development') {
       publicPath: config.output.publicPath,
     })
   );
+  app.use(hotMiddleware(compiler));
 }
 
-app.use('/api', require('./api'));
+app.use('/api', api);
 app.get('*', (req, res) => {
   let indexFile;
   if (BUILD === 'development') {

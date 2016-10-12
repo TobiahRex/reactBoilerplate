@@ -23,6 +23,9 @@
     "mocha": true
   },
   "rules": {
+    "quotes": 0,
+    "react/jsx-boolean-value": 1,
+    "forbid-prop-types": "off",
     "no-param-reassign": ["error", { "props": false }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": [2, { "devDependencies": true } ],

@@ -3,6 +3,8 @@ import Thing from '../db/Thing';
 
 const router = express.Router();
 
+router.get('/:thingId', (req, res) => Thing.findById(req.params.thingId, res.handle));
+
 router.route('/:thingId')
   .get((req, res) => Thing.findById(req.params.thingId, res.handle))
   .put((req, res) =>

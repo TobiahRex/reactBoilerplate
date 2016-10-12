@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import uuid from 'uuid';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import styles from './Styles/ThingStyles';
@@ -50,44 +51,53 @@ export default class Thing extends Component {
 
   submitGroup() {
     return (
-      <span>
+      <div>
         <TextField
+          id={uuid()}
           onChange={e => this.onInputChange(e)}
           value={this.state.newName}
         />
-        <RaisedButton label="Default">Hi</RaisedButton>
         <RaisedButton
           onClick={this.submitEdit}
           type="submit"
           label="Submit"
+          style={styles.lftMargin}
+          primary
         />
         <RaisedButton
           onClick={this.cancelEdit}
-          type="submit"
+          type="button"
           label="Cancel"
+          secondary
+          style={styles.btnMargin}
         />
-      </span>
+      </div>
     )
   }
 
   editGroup() {
     return (
-      <span>
+      <div>
         <TextField
+          id={uuid()}
           value={this.state.data.name}
-          onChange={e => this.onInputChange(e)}
+          disabled
         />
         <RaisedButton
           onClick={this.enableEdit}
-          type="buttom"
+          type="button"
           label="Edit"
+          style={styles.lftMargin}
+          primary
         />
         <RaisedButton
           onClick={() => this.removeThing(this.props.data._id)}
-          type="buttom"
+          type="button"
           label="Remove"
+          style={styles.btnMargin}
+          secondary
         />
-      </span>
+    </div>
     )
   }
 

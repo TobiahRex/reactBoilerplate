@@ -16,20 +16,21 @@ export default class InputNewThing extends Component {
       type: "text",
       floatingLabelText: "New Name Input",
       onChange: e => this.onInputChange(e),
+      required: true,
     };
     this.rbProps1 = {
-      style: styles.btnMargin,
+      style: styles.lftMargin,
       primary: true,
       label: "ADD",
       type: "submit"
-    }
+    };
     this.rbProps2 = {
-      style: styles.btnMargin,
-      primary: true,
+      style: styles.lftMargin,
+      secondary: true,
       label: "CLEAR",
       type: "button",
       onClick: () => this.clearInput()
-    }
+    };
 
     // --- Bindings --- //
     this.submitNewThing = this.submitNewThing.bind(this);
@@ -58,7 +59,7 @@ export default class InputNewThing extends Component {
   render() {
     return (<div>
       <form onSubmit={this.submitNewThing}>
-        <TextField {...this.tfProps} value={this.state.newData} required />
+        <TextField {...this.tfProps} value={this.state.newData} />
         <RaisedButton {...this.rbProps1} />
         <RaisedButton {...this.rbProps2} />
       </form>

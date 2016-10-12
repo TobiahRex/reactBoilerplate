@@ -6,12 +6,13 @@ const PORT = process.env.PORT || 3000;
 
 const devConfig = {
   noInfo: true,
-  devtool: 'eval-cheap-module-sourcemap',
+  devtool: 'inline-source-map',
   target: 'web',
   debug: true,
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    './src/index',
+    './src/Styles/style.css',
+    './src/index.js',
   ],
   output: {
     path: path.join(__dirname, 'build'),
@@ -19,13 +20,17 @@ const devConfig = {
     pathInfo: true,
     filename: 'bundle.js',
   },
+  devServer: {
+    contentBase: './src',
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'DEV': JSON.stringify(process.env.DEV),
-        'TEST_GLOBAL': JSON.stringify(process.env.TEST_GLOBAL),
+        DEV: JSON.stringify(process.env.DEV),
+        TEST_GLOBAL: JSON.stringify(process.env.TEST_GLOBAL),
       },
     }),
   ],
@@ -38,9 +43,8 @@ const devConfig = {
         include: path.join(__dirname, 'src'),
       },
       {
-        test: /\.css$/,
-        loader: 'style!css',
-        exclude: /(node_modules|bower_components)/,
+        test: /(\.css)$/,
+        loaders: ['style', 'css'],
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
@@ -51,7 +55,7 @@ const devConfig = {
         loader: 'url?prefix=font/&limit=5000',
       },
       {
-        test: /\.tff(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=application/octet-stream',
       },
       {

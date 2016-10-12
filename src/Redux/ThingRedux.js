@@ -9,21 +9,19 @@ const { Types, Creators } = createActions({
   editThing: ['editedThing'],
   editThingSuccess: ['thing'],
   removeThing: ['thingId'],
-  removeThingSucess: ['thing'],
+  removeThingSuccess: ['thing'],
   getThings: null,
 });
 
 export const ThingTypes = Types;
-
 export default Creators;
-
 export const INITIAL_STATE = [];
 
-const getAllThingsSuccess = (state, { things }) =>
-things || [];
+// ------- Response Actions ------- //
 
-const createThingSuccess = (state, { thing }) =>
-state.concat(thing);
+const getAllThingsSuccess = (state, { things }) => things || [];
+
+const createThingSuccess = (state, { thing }) => state.concat(thing);
 
 const editThingSuccess = (state, { thing }) => {
   const newState = state.slice();

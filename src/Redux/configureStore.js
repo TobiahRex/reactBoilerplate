@@ -18,16 +18,15 @@ export default (rootReducer, rootSaga) => {
 
   const store = createStore(rootReducer, compose(...enhancers));
   sagaMiddleware.run(rootSaga);
+  store.dispatch(Actions.getAllThings());
 
-  /*
-  store: {
+  return store;
+};
+
+/* store: {
     dispatch: (action) => // do stuff,
     getState: () => // do stuff,
     replaceReducer: (n) => // do stuff,
     subscribe: subscribe(listener) => // do stuff
   }
-  */
-  store.dispatch(Actions.getAllThings());
-
-  return store;
-};
+*/
