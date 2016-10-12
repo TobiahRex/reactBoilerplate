@@ -2,6 +2,6 @@
 
 export default {
   btnMargin: {
-    margin: 12,
+    margin: 8,
   }
 }
