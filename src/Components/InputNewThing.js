@@ -10,28 +10,6 @@ export default class InputNewThing extends Component {
       newData: '',
     };
 
-    // --- Props --- //
-    this.tfProps = {
-      hintText: "Thing Name",
-      type: "text",
-      floatingLabelText: "New Name Input",
-      onChange: e => this.onInputChange(e),
-      required: true,
-    };
-    this.rbProps1 = {
-      style: styles.lftMargin,
-      primary: true,
-      label: "ADD",
-      type: "submit"
-    };
-    this.rbProps2 = {
-      style: styles.lftMargin,
-      secondary: true,
-      label: "CLEAR",
-      type: "button",
-      onClick: () => this.clearInput()
-    };
-
     // --- Bindings --- //
     this.submitNewThing = this.submitNewThing.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
@@ -57,11 +35,38 @@ export default class InputNewThing extends Component {
 
   // ------------ render ------------ //
   render() {
+    // --- Component Props --- //
+    const PROPS = {
+      form: {
+        onSubmit: this.submitNewThing,
+      },
+      tf: {
+        hintText: "Thing Name",
+        type: "text",
+        floatingLabelText: "New Name Input",
+        onChange: e => this.onInputChange(e),
+        required: true,
+        value: this.state.newData,
+      },
+      rb1: {
+        style: styles.lftMargin,
+        primary: true,
+        label: "add",
+        type: "submit",
+      },
+      rb2: {
+        style: styles.lftMargin,
+        secondary: true,
+        label: "clear",
+        type: "button",
+        onClick: () => this.clearInput(),
+      },
+    };
     return (<div>
-      <form onSubmit={this.submitNewThing}>
-        <TextField {...this.tfProps} value={this.state.newData} />
-        <RaisedButton {...this.rbProps1} />
-        <RaisedButton {...this.rbProps2} />
+      <form {...PROPS.form}>
+        <TextField {...PROPS.tf} />
+        <RaisedButton {...PROPS.rb1} />
+        <RaisedButton {...PROPS.rb2} />
       </form>
     </div>);
   }

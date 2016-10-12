@@ -21,11 +21,11 @@ const muiCard = ({ thing }) => (
       <RaisedButton label="Button 2" secondary />
     </CardActions>
   </Card>
-)
+);
 
 muiCard.propTypes = {
   thing: PropTypes.string,
-}
+};
 
 export default muiCard;
 

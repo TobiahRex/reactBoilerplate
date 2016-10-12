@@ -97,7 +97,7 @@ export default class Thing extends Component {
           style={styles.btnMargin}
           secondary
         />
-    </div>
+      </div>
     )
   }
 
