@@ -11,6 +11,7 @@ const devConfig = {
   debug: true,
   entry: [
     'webpack-hot-middleware/client?reload=true',
+    './node_modules/toastr/toastr.scss',
     './src/Styles/style.css',
     './src/index.js',
   ],
@@ -27,6 +28,10 @@ const devConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         DEV: JSON.stringify(process.env.DEV),

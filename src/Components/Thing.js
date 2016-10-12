@@ -102,7 +102,6 @@ export default class Thing extends Component {
   }
 }
 
-
 Thing.propTypes = {
   data: PropTypes.object, //eslint-disable-line
   editThing: PropTypes.func.isRequired,
