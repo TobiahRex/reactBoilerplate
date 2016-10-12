@@ -11,14 +11,16 @@ export default class InputNewThing extends Component {
     this.inputProps = {
       type: 'text',
       onChange: e => this.onInputChange(e),
-      value: this.state.newDate,
     };
 
     this.submitNewThing = this.submitNewThing.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.clearInput = this.clearInput.bind(this);
   }
 
-  onInputChange(e) { this.setState({ newData: e.target.value }); }
+  onInputChange(e) {
+    this.setState({ newData: e.target.value });
+  }
 
   submitNewThing(e) {
     e.preventDefault();
@@ -26,11 +28,16 @@ export default class InputNewThing extends Component {
     this.setState({ newData: '' });
   }
 
+  clearInput() {
+    this.setState({ newData: '' });
+  }
+
   render() {
     return (<div>
       <form onSubmit={this.submitNewThing}>
-        <input {...this.inputProps} required />
-        <button type="subit">ADD</button>
+        <input value={this.state.newData} {...this.inputProps} required />
+        <button type="submit">ADD</button>
+        <button onClick={this.clearInput} type="buttom">CLEAR</button>
       </form>
     </div>);
   }

@@ -1,4 +1,7 @@
 import React, { PropTypes, Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import styles from './Styles/ThingStyles';
 
 export default class Thing extends Component {
   constructor(props) {
@@ -44,25 +47,33 @@ export default class Thing extends Component {
   }
 
   render() {
-    console.log('this.props.data: ', this.props.data);
     // this.props = data, editThing, removeThing
     const buttonSet = this.state.edit ?
-      <div>
-        <input onChange={e => this.onInputChange(e)} value={this.state.newName} />
-        <button onClick={this.submitEdit} type="submit">Submit</button>
-        <button onClick={this.cancelEdit} type="submit">Cancel</button>
-      </div>
+    <div>
+      <TextField
+        hintText="Thing Name"
+        floatingLabelText={this.state.newName}
+        />
+      <input onChange={e => this.onInputChange(e)} value={this.state.newName} />
+      <RaisedButton label="Default">Hi</RaisedButton>
+      <button onClick={this.submitEdit} type="submit">Submit</button>
+      <button onClick={this.cancelEdit} type="submit">Cancel</button>
+    </div>
     :
-      <div>
-        <span>{this.state.data.name}: </span>
-        <button onClick={this.enableEdit} type="buttom">Edit</button>
-        <button onClick={() => this.removeThing(this.props.data.id)} type="buttom">Remove</button>
-      </div>;
+    <div>
+      <TextField
+        hintText="Thing Name"
+        floatingLabelText={this.state.data.newName}
+        />
+      <RaisedButton label="Default" />
+      <button onClick={this.enableEdit} type="buttom">Edit</button>
+      <button onClick={() => this.removeThing(this.props.data._id)} type="buttom">Remove</button>
+    </div>;
 
     return (
-      <span>
+      <div>
         {buttonSet}
-      </span>
+      </div>
     );
   }
 }
