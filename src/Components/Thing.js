@@ -76,6 +76,28 @@ export default class Thing extends Component {
   }
 
   editGroup() {
+    const PROPS = {
+      tf: {
+        id: uuid(),
+        value: this.state.data.name,
+        disabled: true,
+      },
+      rb1: {
+        onClick: this.enableEdit,
+        type: "button",
+        label: "Edit",
+        style: styles.lftMargin,
+        primary: true,
+      },
+      rb2: {
+        onClick: () => this.removeThing(this.props.data._id),
+        type: "button",
+        label: "Remove",
+        style: styles.btnMargin,
+        secondary: true,
+      },
+    };
+
     return (
       <div>
         <TextField

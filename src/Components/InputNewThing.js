@@ -43,7 +43,7 @@ export default class InputNewThing extends Component {
       tf: {
         hintText: "Thing Name",
         type: "text",
-        floatingLabelText: "New Name Input",
+        floatingLabelText: "New Thing Input",
         onChange: e => this.onInputChange(e),
         required: true,
         value: this.state.newData,
