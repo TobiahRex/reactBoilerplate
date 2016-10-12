@@ -17,7 +17,6 @@ export default class Thing extends Component {
     this.enableEdit = this.enableEdit.bind(this);
     this.submitEdit = this.submitEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
-    this.removeThing = this.removeThing.bind(this);
     this.submitGroup = this.submitGroup.bind(this);
     this.editGroup = this.editGroup.bind(this);
   }
@@ -45,34 +44,36 @@ export default class Thing extends Component {
     this.setState({ edit: true });
   }
 
-  removeThing(id) {
-    this.props.removeThing(id);
-  }
-
   submitGroup() {
+    const PROPS = {
+      tf: {
+        id: uuid(),
+        onChange: e => this.onInputChange(e),
+        value: this.state.newName,
+      },
+      rb1: {
+        onClick: this.submitEdit,
+        type: "submit",
+        label: "Submit",
+        style: styles.lftMargin,
+        primary: true,
+      },
+      rb2: {
+        onClick: this.cancelEdit,
+        type: "button",
+        label: "Cancel",
+        style: styles.btnMargin,
+        secondary: true,
+      },
+    };
+
     return (
       <div>
-        <TextField
-          id={uuid()}
-          onChange={e => this.onInputChange(e)}
-          value={this.state.newName}
-        />
-        <RaisedButton
-          onClick={this.submitEdit}
-          type="submit"
-          label="Submit"
-          style={styles.lftMargin}
-          primary
-        />
-        <RaisedButton
-          onClick={this.cancelEdit}
-          type="button"
-          label="Cancel"
-          secondary
-          style={styles.btnMargin}
-        />
+        <TextField {...PROPS.tf} />
+        <RaisedButton {...PROPS.rb1} />
+        <RaisedButton {...PROPS.rb2} />
       </div>
-    )
+    );
   }
 
   editGroup() {
@@ -90,7 +91,7 @@ export default class Thing extends Component {
         primary: true,
       },
       rb2: {
-        onClick: () => this.removeThing(this.props.data._id),
+        onClick: () => this.props.removeThing(this.props.data._id),
         type: "button",
         label: "Remove",
         style: styles.btnMargin,
@@ -100,35 +101,17 @@ export default class Thing extends Component {
 
     return (
       <div>
-        <TextField
-          id={uuid()}
-          value={this.state.data.name}
-          disabled
-        />
-        <RaisedButton
-          onClick={this.enableEdit}
-          type="button"
-          label="Edit"
-          style={styles.lftMargin}
-          primary
-        />
-        <RaisedButton
-          onClick={() => this.removeThing(this.props.data._id)}
-          type="button"
-          label="Remove"
-          style={styles.btnMargin}
-          secondary
-        />
+        <TextField {...PROPS.tf} />
+        <RaisedButton {...PROPS.rb1} />
+        <RaisedButton {...PROPS.rb2} />
       </div>
-    )
+    );
   }
 
   render() {
-    // this.props = data, editThing, removeThing
-    const buttonSet = this.state.edit ? this.submitGroup() : this.editGroup();
     return (
       <div>
-        {buttonSet}
+        {this.state.edit ? this.submitGroup() : this.editGroup()}
       </div>
     );
   }
