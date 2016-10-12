@@ -17,6 +17,8 @@ export default class Thing extends Component {
     this.submitEdit = this.submitEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.removeThing = this.removeThing.bind(this);
+    this.submitGroup = this.submitGroup.bind(this);
+    this.editGroup = this.editGroup.bind(this);
   }
 
   onInputChange(e) {
@@ -46,23 +48,52 @@ export default class Thing extends Component {
     this.props.removeThing(id);
   }
 
+  submitGroup() {
+    return (
+      <span>
+        <TextField
+          onChange={e => this.onInputChange(e)}
+          value={this.state.newName}
+        />
+        <RaisedButton label="Default">Hi</RaisedButton>
+        <RaisedButton
+          onClick={this.submitEdit}
+          type="submit"
+          label="Submit"
+        />
+        <RaisedButton
+          onClick={this.cancelEdit}
+          type="submit"
+          label="Cancel"
+        />
+      </span>
+    )
+  }
+
+  editGroup() {
+    return (
+      <span>
+        <TextField
+          value={this.state.data.name}
+          onChange={e => this.onInputChange(e)}
+        />
+        <RaisedButton
+          onClick={this.enableEdit}
+          type="buttom"
+          label="Edit"
+        />
+        <RaisedButton
+          onClick={() => this.removeThing(this.props.data._id)}
+          type="buttom"
+          label="Remove"
+        />
+      </span>
+    )
+  }
+
   render() {
     // this.props = data, editThing, removeThing
-    const buttonSet = this.state.edit ?
-    <div>
-      <input onChange={e => this.onInputChange(e)} value={this.state.newName} />
-      <RaisedButton label="Default">Hi</RaisedButton>
-      <button onClick={this.submitEdit} type="submit">Submit</button>
-      <button onClick={this.cancelEdit} type="submit">Cancel</button>
-    </div>
-    :
-    <div>
-      <input onChange={e => this.onInputChange(e)} value={this.state.data.name} />
-      <RaisedButton label="Default" />
-      <button onClick={this.enableEdit} type="buttom">Edit</button>
-      <button onClick={() => this.removeThing(this.props.data._id)} type="buttom">Remove</button>
-    </div>;
-
+    const buttonSet = this.state.edit ? this.submitGroup() : this.editGroup();
     return (
       <div>
         {buttonSet}
@@ -70,6 +101,7 @@ export default class Thing extends Component {
     );
   }
 }
+
 
 Thing.propTypes = {
   data: PropTypes.object, //eslint-disable-line
