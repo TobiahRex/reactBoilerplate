@@ -2,13 +2,17 @@ import React, { PropTypes } from 'react';
 import uuid from 'uuid';
 import Thing from './Thing';
 
-const ThingList = ({ removeThing, editThing, things }) => {
-  const eachThing = things.map(thing => (
-    <div key={uuid()}>
-      <Thing data={thing} editThing={editThing} removeThing={removeThing} />
-    </div>
-    )
-  );
+const ThingList = ({ fetching, removeThing, editThing, things }) => {
+  const eachThing = things.map((thing) => {
+    const PROPS = {
+      fetching,
+      editThing,
+      removeThing,
+      data: thing,
+    };
+
+    return (<div key={uuid()}><Thing {...PROPS} /></div>);
+  });
 
   return (
     <div>
@@ -18,6 +22,7 @@ const ThingList = ({ removeThing, editThing, things }) => {
 };
 
 ThingList.propTypes = {
+  fetching: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   things: PropTypes.array.isRequired, // eslint-disable-line

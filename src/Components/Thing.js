@@ -22,6 +22,7 @@ export default class Thing extends Component {
     const newThing = this.state.data;
     newThing.name = this.state.newName;
 
+    this.props.fetching();
     this.props.editThing(newThing);
     this.setState({ newName: '', data: {} });
   }
@@ -76,7 +77,10 @@ export default class Thing extends Component {
         primary: true,
       },
       rb2: {
-        onClick: () => this.props.removeThing(this.props.data._id),
+        onClick: () => {
+          this.props.fetching();
+          this.props.removeThing(this.props.data._id)
+        },
         type: "button",
         label: "Remove",
         style: styles.btnMargin,
@@ -107,4 +111,5 @@ Thing.propTypes = {
   data: PropTypes.object, //eslint-disable-line
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
+  fetching: PropTypes.func.isRequired,
 };

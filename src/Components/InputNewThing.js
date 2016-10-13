@@ -24,6 +24,7 @@ export default class InputNewThing extends Component {
   submitNewThing(e) {
     e.preventDefault();
     this.setState({ newData: '' });
+    this.props.fetching();
     this.props.createThing({ name: this.state.newData });
   }
 
@@ -33,9 +34,7 @@ export default class InputNewThing extends Component {
 
   // ------------ lifeCycle ------------ //
 
-  // ------------ render ------------ //
   render() {
-    // --- Component Props --- //
     const PROPS = {
       form: {
         onSubmit: this.submitNewThing,
@@ -72,4 +71,7 @@ export default class InputNewThing extends Component {
   }
 }
 
-InputNewThing.propTypes = { createThing: PropTypes.func.isRequired };
+InputNewThing.propTypes = {
+  fetching: PropTypes.func.isRequired,
+  createThing: PropTypes.func.isRequired
+};
