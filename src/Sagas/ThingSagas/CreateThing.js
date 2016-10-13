@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import thingActions from '../Redux/ThingRedux';
-import apiActions from '../Redux/APIRedux';
+import thingActions from '../../Redux/ThingRedux';
+import apiActions from '../../Redux/ApiRedux';
 
 export default function* create(api, action) {
   const response = yield call(() => api.createThing(action.thingName));

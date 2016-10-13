@@ -12,7 +12,7 @@ export const ApiTypes = Types;
 export default Creators;
 export const INITIAL_STATE = {
   fetching: null,
-  count: null,
+  count: 0,
   error: null,
   success: null,
 };
