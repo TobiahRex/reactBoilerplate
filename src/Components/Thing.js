@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import uuid from 'uuid';
 import { TextField, RaisedButton } from 'material-ui';
 import styles from './Styles/ThingStyles';
+import SnackBar from './ApiSnackBar';
 
 export default class Thing extends Component {
   constructor(props) {
