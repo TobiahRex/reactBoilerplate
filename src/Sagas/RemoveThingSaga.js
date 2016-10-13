@@ -1,8 +1,13 @@
 import { call, put } from 'redux-saga/effects';
-import Actions from '../Redux/ThingRedux';
-import handle from '../Services/Utility';
+import thingActions from '../Redux/ThingRedux';
+import apiActions from '../Redux/APIRedux';
 
 export default function* remove(api, action) {
   const response = yield call(() => api.removeThing(action.thingId));
-  yield put(Actions.removeThingSuccess(handle(response)));
+  if (response.ok) {
+    yield [put(thingActions.removeThingSuccess(response.data)),
+    put(apiActions.apiSuccess())];
+  } else {
+    yield put(apiActions.apiFail(response.problem));
+  }
 }

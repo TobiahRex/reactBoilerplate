@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux';
 import configureStore from './configureStore';
 import rootSaga from '../Sagas/';
-import { thingReducer } from '../Redux/ThingRedux';
+
+// ------- Reducer Imports ------- //
+
+import { thingReducer as things } from '../Redux/ThingRedux';
+import { apiReducer as api } from '../Redux/APIRedux';
 
 export default () => {
-  const things = thingReducer;
   const rootReducer = combineReducers({
     things,
+    api,
   });
   return configureStore(rootReducer, rootSaga);
 };

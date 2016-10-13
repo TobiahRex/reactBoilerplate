@@ -11,7 +11,6 @@ const devConfig = {
   debug: true,
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    './node_modules/toastr/toastr.scss',
     './src/Styles/style.css',
     './src/index.js',
   ],

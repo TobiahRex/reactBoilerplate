@@ -97,6 +97,7 @@ export default class Thing extends Component {
     return (
       <div>
         {this.state.edit ? this.submitGroup() : this.editGroup()}
+
       </div>
     );
   }
