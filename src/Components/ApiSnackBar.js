@@ -1,54 +1,18 @@
-// import React, { PropTypes, Component } from 'react';
-// import { connect } from 'react-redux';
-// import { SnackBar } from 'material-ui';
-//
-// class muiToast extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       message: ''
-//     }
-//   }
-//
-//   render() {
-//
-//     return (
-//       <SnackBar
-//         open={apiStatus.success || false}
-//         message={"API Successfull"}
-//         autoHideDuration={4000}
-//         />
-//     );
-//   }
-// }
-//
-// muiToast.propTypes = {
-//   show: PropTypes.bool,
-//   message: PropTypes.string,
-// };
-//
-// const mapStateToProps = state => ({
-//   show: state.api,
-// });
-//
-// export default connect(mapStateToProps, null)(muiToast);
-
 import React, { PropTypes } from 'react';
 import Snackbar from 'material-ui/Snackbar';
-
+/*
+This Component relies on a piece of state passed down in props.
+Should contain, an error & fetching boolean.
+*/
 export default class muiToast extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show: false,
-      message: "",
-      // api status
-      error: '',
-      fetching: '',
+      message: '',
+      error: null,
+      fetching: null,
     };
-    // ----- Bindings ----- //
-    this.handleTouchTap = this.handleTouchTap.bind(this);
-    this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
   componentWillMount() {
@@ -58,21 +22,23 @@ export default class muiToast extends React.Component {
     });
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const error = this.state.error;
     const fetching = this.state.fetching;
     const apiError = nextProps.apiStatus.error;
     const apiFetching = nextProps.apiStatus.fetching;
 
-    if (!error && !apiError && fetching && !apiFetching) {
+    if (!error && fetching && !apiError && !apiFetching) {
+      // If fetching was successfully completed
       this.setState({
         message: "Database updated SUCCESSFULLY!",
-        error: apiError,
-        fetching: apiFetching,
+        error: false,
+        fetching: false,
         show: true,
       });
       return true;
     } else if (!apiError && apiFetching) {
+      // If we just started fetching
       this.setState({
         message: "API Request in Progress",
         error: false,
@@ -81,6 +47,7 @@ export default class muiToast extends React.Component {
       });
       return true;
     } else if (!error && apiError) {
+      // if fetching yielded an error
       this.setState({
         message: "Database update FAILED!",
         error: true,
@@ -92,27 +59,16 @@ export default class muiToast extends React.Component {
     return true;
   }
 
-  handleTouchTap() {
-    this.setState({
-      show: true,
-    });
-  }
-
-  handleRequestClose() {
-    this.setState({
-      show: false,
-    });
-  }
-
   render() {
+    const PROPS = {
+      open: this.state.show,
+      message: this.state.message,
+      autoHideDuration: 2000,
+      onRequestClose: () => this.setState({ show: false })
+    };
     return (
       <div>
-        <Snackbar
-          open={this.state.show}
-          message={this.state.message}
-          autoHideDuration={2000}
-          onRequestClose={this.handleRequestClose}
-        />
+        <Snackbar {...PROPS} />
       </div>
     );
   }
