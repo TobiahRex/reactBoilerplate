@@ -6,16 +6,18 @@ import apiActions from '../Redux/ApiRedux';
 import ThingList from '../Components/ThingList';
 import InputNewThing from '../Components/InputNewThing';
 
-const Things = ({ fetching, createThing, editThing, removeThing, things }) => {
+const Things = ({ fetching, createThing, editThing, removeThing, things, apiStatus }) => {
   const propsThingList = {
     fetching,
     editThing,
     removeThing,
     things,
+    apiStatus,
   };
   const propsInputNew = {
     fetching,
     createThing,
+    apiStatus,
   }
 
   return (
@@ -31,13 +33,18 @@ const Things = ({ fetching, createThing, editThing, removeThing, things }) => {
 };
 
 Things.propTypes = {
+  fetching: PropTypes.func.isRequired,
   createThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
-  things: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+  things: PropTypes.array.isRequired,
+  apiStatus: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({ things: state.things });
+const mapStateToProps = state => ({
+  things: state.things,
+  apiStatus: state.api,
+});
 const mapDispatchToProps = dispatch => ({
   fetching: () => dispatch(apiActions.fetching()),
   createThing: thingName => dispatch(Actions.createThing(thingName)),

@@ -11,7 +11,7 @@
 //   }
 //
 //   render() {
-//     console.info('this.props: ', this.props);
+//
 //     return (
 //       <SnackBar
 //         open={apiStatus.success || false}
@@ -35,7 +35,6 @@
 
 import React, { PropTypes } from 'react';
 import Snackbar from 'material-ui/Snackbar';
-// import RaisedButton from 'material-ui/RaisedButton';
 
 export default class muiToast extends React.Component {
   constructor(props) {
@@ -59,49 +58,51 @@ export default class muiToast extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     const error = this.state.error;
-    console.log('apiFetching', apiFetching);
     const fetching = this.state.fetching;
-    console.log('apiFetching', apiFetching);
     const apiError = nextProps.apiStatus.error;
-    console.log('apiFetching', apiFetching);
     const apiFetching = nextProps.apiStatus.fetching;
-    console.log('apiFetching', apiFetching);
 
     if (!error && !apiError && fetching && !apiFetching) {
-      console.log('!error && !apiError && fetching && !apiFetching', !error && !apiError && fetching && !apiFetching);
       this.setState({
         message: "Database updated SUCCESSFULLY!",
         error: apiError,
         fetching: apiFetching,
-        show: !this.state.show,
+        show: true,
+      });
+      return true;
+    } else if (!apiError && apiFetching) {
+      this.setState({
+        message: "API Request in Progress",
+        error: false,
+        fetching: true,
+        show: true,
       });
       return true;
     } else if (!error && apiError) {
       this.setState({
         message: "Database update FAILED!",
-        error: apiError,
-        fetching: apiFetching,
-        show: !this.state.show,
+        error: true,
+        fetching: false,
+        show: true,
       });
       return true;
     }
-    console.warn('nothing happening');
-    return false;
+    return true;
   }
 
   handleTouchTap() {
     this.setState({
       show: true,
     });
-  };
+  }
 
   handleRequestClose() {
     this.setState({
       show: false,
     });
-  };
+  }
 
   render() {
     return (
@@ -118,6 +119,5 @@ export default class muiToast extends React.Component {
 }
 
 muiToast.propTypes = {
-  apiError: PropTypes.bool,
-  apiFetching: PropTypes.bool,
+  apiStatus: PropTypes.object, // eslint-disable-line
 };
