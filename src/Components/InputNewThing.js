@@ -61,6 +61,7 @@ export default class InputNewThing extends Component {
         onClick: () => this.clearInput(),
       },
     };
+
     return (<div>
       <form {...PROPS.form}>
         <TextField {...PROPS.tf} />

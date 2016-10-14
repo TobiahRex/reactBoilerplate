@@ -1,17 +1,18 @@
 import React, { PropTypes, Component } from 'react';
 import uuid from 'uuid';
 import { TextField, RaisedButton } from 'material-ui';
+// import SnackBar from 'material-ui';
 import styles from './Styles/ThingStyles';
 import SnackBar from './ApiSnackBar';
 
 export default class Thing extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       data: this.props.data,
       newName: this.props.data.name,
       edit: false,
+      apiSuccess: this.props.apiStatus.success || false,
     };
 
     this.submitEdit = this.submitEdit.bind(this);
@@ -80,7 +81,7 @@ export default class Thing extends Component {
       rb2: {
         onClick: () => {
           this.props.fetching();
-          this.props.removeThing(this.props.data._id)
+          this.props.removeThing(this.props.data._id);
         },
         type: "button",
         label: "Remove",
@@ -102,15 +103,15 @@ export default class Thing extends Component {
     return (
       <div>
         {this.state.edit ? this.submitGroup() : this.editGroup()}
-
       </div>
     );
   }
 }
 
 Thing.propTypes = {
+  fetching: PropTypes.func.isRequired,
   data: PropTypes.object, //eslint-disable-line
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
-  fetching: PropTypes.func.isRequired,
+  apiStatus: PropTypes.object,
 };
