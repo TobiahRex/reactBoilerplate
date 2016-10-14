@@ -41,7 +41,6 @@ export default class muiToast extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
       show: false,
       message: "",
       // api status
@@ -60,26 +59,24 @@ export default class muiToast extends React.Component {
     });
   }
 
-  shouldComponentUpdate(nextProps) {
-    console.log('this.state.error: ', this.state.error);
-    console.log('this.state.fetching: ', this.state.fetching);
-    console.log('nextProps.apiStatus.error: ', nextProps.apiStatus.error);
-    console.log('nextProps.apiStatus.fetching: ', nextProps.apiStatus.fetching);
-
+  componentWillReceiveProps(nextProps) {
     const error = this.state.error;
+    console.log('apiFetching', apiFetching);
     const fetching = this.state.fetching;
+    console.log('apiFetching', apiFetching);
     const apiError = nextProps.apiStatus.error;
+    console.log('apiFetching', apiFetching);
     const apiFetching = nextProps.apiStatus.fetching;
+    console.log('apiFetching', apiFetching);
 
-    // console.log('YO: ', !error && !fetching && !apiError && apiFetching);
     if (!error && !apiError && fetching && !apiFetching) {
+      console.log('!error && !apiError && fetching && !apiFetching', !error && !apiError && fetching && !apiFetching);
       this.setState({
         message: "Database updated SUCCESSFULLY!",
         error: apiError,
         fetching: apiFetching,
         show: !this.state.show,
       });
-      console.info('SET NEW STATE');
       return true;
     } else if (!error && apiError) {
       this.setState({
@@ -88,7 +85,6 @@ export default class muiToast extends React.Component {
         fetching: apiFetching,
         show: !this.state.show,
       });
-      console.warn('SET NEW STATE ');
       return true;
     }
     console.warn('nothing happening');
@@ -97,13 +93,13 @@ export default class muiToast extends React.Component {
 
   handleTouchTap() {
     this.setState({
-      open: true,
+      show: true,
     });
   };
 
   handleRequestClose() {
     this.setState({
-      open: false,
+      show: false,
     });
   };
 
@@ -113,7 +109,7 @@ export default class muiToast extends React.Component {
         <Snackbar
           open={this.state.show}
           message={this.state.message}
-          autoHideDuration={4000}
+          autoHideDuration={2000}
           onRequestClose={this.handleRequestClose}
         />
       </div>
