@@ -1,4 +1,3 @@
-/*  eslint-disable no-console  */
 /*  eslint-disable global-require  */
 
 import express from 'express';
@@ -20,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use((req, res, next) => {
   res.handle = (err, data) => {
-    console.log('Response Error: ', err, '\nResponse Data: ', data);
+    process.stdout.write('Response Error: ', err, '\nResponse Data: ', data);
     res.status(err ? 400 : 200).send(err || data);
   };
   next();
@@ -53,8 +52,11 @@ app.get('*', (req, res) => {
   } else {
     indexFile = path.join(__dirname, './index.html');
   }
-  console.log('📁 indexFile = ', indexFile);
+  process.stdout.write('📁 indexFile = ', indexFile);
   res.sendFile(indexFile);
 });
-app.listen(PORT, err => console.log(err || `==> 📡 Server @ ${PORT} 🛠 BUILD = ${BUILD}`));
-mongoose.connect(MONGO, err => console.log(err || `==> 📜 MONGO @ ${MONGO}`));
+app.listen(PORT, err =>
+  process.stdout.write(err || `==> 📡  Server @ ${PORT}
+`));
+mongoose.connect(MONGO, err => process.stdout.write(err || `==> 📜  MONGO @ ${MONGO}
+`));

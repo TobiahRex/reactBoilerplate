@@ -1,5 +1,6 @@
 import { createActions, createReducer } from 'reduxsauce';
 
+// ------- Types & Creators ------- //
 const { Types, Creators } = createActions({
   appStartup: null,
   getAllThings: null,
@@ -13,12 +14,12 @@ const { Types, Creators } = createActions({
   getThings: null,
 });
 
+// ------- Initial State ------- //
 export const ThingTypes = Types;
 export default Creators;
 export const INITIAL_STATE = [];
 
 // ------- Response Actions ------- //
-
 const getAllThingsSuccess = (state, { things }) => things || [];
 
 const createThingSuccess = (state, { thing }) => state.concat(thing);
@@ -33,6 +34,7 @@ const editThingSuccess = (state, { thing }) => {
 const removeThingSuccess = (state, { thing }) =>
 state.filter(stateThing => stateThing._id !== thing._id);
 
+// ------- create Reducer ------- //
 export const thingReducer = createReducer(INITIAL_STATE, {
   [Types.GET_ALL_THINGS_SUCCESS]: getAllThingsSuccess,
   [Types.EDIT_THING_SUCCESS]: editThingSuccess,

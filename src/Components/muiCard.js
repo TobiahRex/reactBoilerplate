@@ -28,14 +28,3 @@ muiCard.propTypes = {
 };
 
 export default muiCard;
-
-// <Card>
-//   <CardHeader title="CRUD Test" subtitle="Test API" />
-//   <CardText>
-//     {children}
-//   </CardText>
-//   <CardActions>
-//     <RaisedButton label="Edit" />
-//     <RaisedButton label="Remove" />
-//   </CardActions>
-// </Card>
