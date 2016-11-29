@@ -17,7 +17,6 @@ const devConfig = {
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: '/',
-    pathInfo: true,
     filename: 'bundle.js',
   },
   devServer: {
@@ -29,7 +28,7 @@ const devConfig = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.ProvidePlugin({
       $: "jquery",
-      jQuery: "jquery"
+      jQuery: "jquery",
     }),
     new webpack.DefinePlugin({
       'process.env': {
