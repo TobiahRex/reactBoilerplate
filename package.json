@@ -14,9 +14,9 @@
     "lint:watch": "npm run lint -- --watch --ext .js --ext .jsx --color",
     "test:watch": "npm run test -- --watch",
     "clean-bin": "node_modules/.bin/rimraf ./bin/*",
-    "copy-server": "node_modules/.bin/copyfiles -u 1 './server/**/*' ./bin/",
-    "copy-index": "node_modules/.bin/copyfiles -u 1 './src/index.html' ./bin/",
-    "copy-package": "node_modules/.bin/copyfiles './package.json' ./bin/",
+    "copy-server": "node_modules/.bin/copyfiles -u 1 './server/**/*' ./public/",
+    "copy-index": "node_modules/.bin/copyfiles -u 1 './src/index.html' ./public/",
+    "copy-package": "node_modules/.bin/copy-files './package.json' ./public/",
     "prebuild": "npm-run-all clean-bin copy-server copy-index copy-tools copy-package",
     "build": "NODE_ENV=production webpack"
   },
