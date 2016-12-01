@@ -13,9 +13,9 @@ Cannibalized from Templates and Boilerplates from around the web.
   * Airbnb Style Guide implemented.
 
 ## Setup:
-  - `npm install`
+  - `npm i` to install dependencies
   - `npm start` for development server
-  - `npm build` for production server
+  - `npm run build` for production server
 
   NOTE: I Highly recommend running npm update --save to update package json before running "npm start" or "npm build".
 
