@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import createLogger from 'redux-logger';
-import Actions from '../Redux/ThingRedux';
+import thingActions from '../Redux/ThingRedux';
 import apiActions from '../Redux/ApiRedux';
 
 export default (rootReducer, rootSaga) => {
@@ -21,12 +21,12 @@ export default (rootReducer, rootSaga) => {
   sagaMiddleware.run(rootSaga);
 
   store.dispatch(apiActions.fetching());
-  store.dispatch(Actions.getAllThings());
+  store.dispatch(thingActions.getAllThings());
 
   return store;
 };
 
-/* Store Object
+/* Store Object Ref.
   store: {
     dispatch: (action) =>
     getState: () =>
