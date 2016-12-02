@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'material-ui';
-import Actions from '../Redux/ThingRedux';
+import thingActions from '../Redux/ThingRedux';
 import apiActions from '../Redux/ApiRedux';
 import ThingList from '../Components/ThingList';
 import InputNewThing from '../Components/InputNewThing';
@@ -47,9 +47,9 @@ const mapStateToProps = ({ things, api }) => ({
 });
 const mapDispatchToProps = dispatch => ({
   fetching: () => dispatch(apiActions.fetching()),
-  createThing: thingName => dispatch(Actions.createThing(thingName)),
-  removeThing: thingId => dispatch(Actions.removeThing(thingId)),
-  editThing: thing => dispatch(Actions.editThing(thing)),
+  createThing: thingName => dispatch(thingActions.createThing(thingName)),
+  removeThing: thingId => dispatch(thingActions.removeThing(thingId)),
+  editThing: thing => dispatch(thingActions.editThing(thing)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Things);
