@@ -1,6 +1,8 @@
 # _React Boilerplate: Full-Stack_
 Full-Stack REACT & Redux - Created: 6 October 2016
 <!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
+<img src="http://imgur.com/dTXjfrU" />
+
 
 ## DESCRIPTION:
 Cannibalized from Templates and Boilerplates from around the web.
@@ -9,6 +11,7 @@ Cannibalized from Templates and Boilerplates from around the web.
   * Uses _redux_sauce_ to create Types, Creators & Reducer.
   * Uses _redux-logger_ to allow for informative workflow from the devtools console.  
   * Uses _redux-devtools-extension_ to allow for a macro perspective picture of your current store's state.
+    - <img src="http://i.imgur.com/GD4VCkW.png" />
   * Configured for front end environment variables using webpack.DefinePlugin().
   * Airbnb Style Guide implemented.
 
@@ -42,3 +45,7 @@ Cannibalized from Templates and Boilerplates from around the web.
 ## Updates:
 * December 1st 2016:
   - Extensive refactor to entire project.  WARNING in the process of re-factoring package.json and webpack.config for smoother deployment however process is not yet complete.  Will update here when it's finished and GTG.
+
+## ScreenShots:
+* Terminal
+  - <img src="http://i.imgur.com/RjJ7yfA.png" />
