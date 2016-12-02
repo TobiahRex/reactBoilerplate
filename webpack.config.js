@@ -1,5 +1,5 @@
-const path = require('path');
-const webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
 
 const BUILD = process.env.NODE_ENV || 'development';
 const processEnv = {
@@ -21,7 +21,7 @@ const devConfig = {
     './src/index.js',
   ],
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.resolve('build'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -34,8 +34,8 @@ const devConfig = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({ 'process.env': processEnv }),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
   ],
   module: {
@@ -44,7 +44,7 @@ const devConfig = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/,
-        include: path.join(__dirname, 'src'),
+        include: path.resolve('src'),
       },
       {
         test: /(\.css)$/,
@@ -101,13 +101,19 @@ const prodConfig = {
     './src/index',
   ],
   output: {
-    path: path.join(__dirname, 'bin', 'public'),
+    path: path.resolve('bin', 'public'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({ 'process.env': processEnv }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
   ],
   module: {
     loaders: [
@@ -115,7 +121,7 @@ const prodConfig = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/,
-        include: path.join(__dirname, 'src'),
+        include: path.resolve('src'),
       },
       {
         test: /\.css$/,
@@ -163,4 +169,4 @@ const prodConfig = {
     extensions: ['', '.js', '.jsx'],
   },
 };
-module.exports = (BUILD === 'production') ? prodConfig : devConfig;
+export default (BUILD === 'production') ? prodConfig : devConfig;
