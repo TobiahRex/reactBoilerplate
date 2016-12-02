@@ -20,8 +20,9 @@ const BUILD = process.env.NODE_ENV || 'development';
 const app = express();
 const server = new http.Server(app);
 const io = socketIO(server);
-
+let indexFile;
 let socketEmitter;
+
 io.on('connection', (socket) => {
   process.stdout.write('\n>>> Socket Connection!\n');
   socketEmitter = (type, data) => socket.emit(type, data);
@@ -59,13 +60,13 @@ if (BUILD === 'development') {
 
 app.use('/api', api);
 app.get('*', (req, res) => {
-  let indexFile;
   if (BUILD === 'development') {
-    indexFile = path.join(__dirname, '../src/index.html');
+    indexFile = path.resolve('./src/index.html');
   } else {
-    indexFile = path.join(__dirname, './index.html');
+    indexFile = path.resolve('./src/index.html');
   }
-  process.stdout.write('📁 indexFile = ', indexFile);
+  process.stdout.write(`==> 📁  indexFile = ${indexFile}
+`);
   res.sendFile(indexFile);
 });
 

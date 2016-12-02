@@ -1,13 +1,15 @@
 import path from 'path';
 import webpack from 'webpack';
+import dotenv from 'dotenv';
+
+dotenv.config({ silent: true });
 
 const BUILD = process.env.NODE_ENV || 'development';
 const processEnv = {
   NODE_ENV: JSON.stringify('development'),
-  PORT: JSON.stringify(process.env.PORT || 3000),
+  PORT: JSON.stringify(process.env.PORT || 3001),
   BASE_URL: JSON.stringify(process.env.BASE_URL),
   DEV: JSON.stringify(process.env.DEV),
-  TEST_GLOBAL: JSON.stringify(process.env.TEST_GLOBAL),
 };
 
 const devConfig = {
