@@ -25,9 +25,11 @@
   },
   "rules": {
     "quotes": 0,
+    "max-len": [1, 100],
     "react/jsx-boolean-value": 1,
     "forbid-prop-types": "off",
     "no-param-reassign": ["error", { "props": false }],
+    "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": [2, { "devDependencies": true } ],
     "no-underscore-dangle":["error",{"allow": ["_id"]}],
