@@ -1,11 +1,16 @@
 import React, { PropTypes, Component } from 'react';
-import uuid from 'uuid';
 import { TextField, RaisedButton } from 'material-ui';
-// import SnackBar from 'material-ui';
+import uuid from 'uuid';
 import styles from './Styles/ThingStyles';
-import SnackBar from './ApiSnackBar';
 
 export default class Thing extends Component {
+  static propTypes = {
+    fetching: PropTypes.func.isRequired,
+    data: PropTypes.object, //eslint-disable-line
+    editThing: PropTypes.func.isRequired,
+    removeThing: PropTypes.func.isRequired,
+    apiStatus: PropTypes.objectOf(PropTypes.object),
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -14,13 +19,9 @@ export default class Thing extends Component {
       edit: false,
       apiSuccess: this.props.apiStatus.success || false,
     };
-
-    this.submitEdit = this.submitEdit.bind(this);
-    this.submitGroup = this.submitGroup.bind(this);
-    this.editGroup = this.editGroup.bind(this);
   }
 
-  submitEdit() {
+  submitEdit = () => {
     const newThing = this.state.data;
     newThing.name = this.state.newName;
 
@@ -29,7 +30,7 @@ export default class Thing extends Component {
     this.setState({ newName: '', data: {} });
   }
 
-  submitGroup() {
+  submitGroup = () => {
     const PROPS = {
       tf: {
         id: uuid(),
@@ -64,7 +65,7 @@ export default class Thing extends Component {
     );
   }
 
-  editGroup() {
+  editGroup = () => {
     const PROPS = {
       tf: {
         id: uuid(),
@@ -107,11 +108,3 @@ export default class Thing extends Component {
     );
   }
 }
-
-Thing.propTypes = {
-  fetching: PropTypes.func.isRequired,
-  data: PropTypes.object, //eslint-disable-line
-  editThing: PropTypes.func.isRequired,
-  removeThing: PropTypes.func.isRequired,
-  apiStatus: PropTypes.object,
-};
