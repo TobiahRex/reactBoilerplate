@@ -1,7 +1,7 @@
 import express from 'express';
 import Thing from '../db/Thing';
 
-const router = express.Router();
+const router = new express.Router();
 
 router.get('/:thingId', (req, res) => Thing.findById(req.params.thingId, res.handle));
 
