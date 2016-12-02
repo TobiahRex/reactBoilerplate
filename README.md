@@ -41,5 +41,4 @@ Cannibalized from Templates and Boilerplates from around the web.
 
 ## Updates:
 * December 1st 2016:
-  - Added `babel-plugin-transform-react-jsx-source` to "devDependencies".
-  - Renamed `app.js` to `server.js` & added deep modifications.
+  - Extensive refactor to entire project.  WARNING in the process of re-factoring package.json and webpack.config for smoother deployment however process is not yet complete.  Will update here when it's finished and GTG.
