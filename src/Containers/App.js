@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { AppBar } from 'material-ui';
-import SnackBar from '../Components/ApiSnackBar';
 
 const App = ({ children }) => (
   <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
@@ -14,7 +13,7 @@ const App = ({ children }) => (
 );
 
 App.propTypes = {
-  children: PropTypes.object, //eslint-disable-line
-}
+  children: PropTypes.objectOf(PropTypes.any.isRequired),
+};
 
 export default App;
