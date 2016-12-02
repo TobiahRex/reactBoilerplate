@@ -1,7 +1,7 @@
 # _React Boilerplate: Full-Stack_
 Full-Stack REACT & Redux - Created: 6 October 2016
 <!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
-<img src="http://imgur.com/dTXjfrU" />
+<img src="http://imgur.com/dTXjfrU.png" />
 
 
 ## DESCRIPTION:
