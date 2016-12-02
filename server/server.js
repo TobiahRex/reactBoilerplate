@@ -13,6 +13,7 @@ import webpackConfig from '../webpack.config';
 import api from './api';
 
 // ---------------------------- CONFIG -----------------------------------------
+mongoose.Promise = Promise;
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
