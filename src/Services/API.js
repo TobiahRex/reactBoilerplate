@@ -1,6 +1,14 @@
 import { create } from 'apisauce';
 
-const createAPI = (baseURL = 'http://localhost:3001/') => {
+let baseURL;
+if (process.env.NODE_ENV === 'production') {
+  baseURL = `${process.env.DEPLOY_URL}`;
+} else {
+  baseURL = process.env.BASE_URL;
+}
+console.info('baseURL: ', baseURL);
+
+const createAPI = () => {
   //  STEP 1: Create and configure an apisauce-based api object.
   const api = create({
     baseURL,    // base URL is read from the "constructor"

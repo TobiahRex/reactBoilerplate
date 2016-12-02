@@ -3,6 +3,14 @@ const webpack = require('webpack');
 
 const BUILD = process.env.NODE_ENV || 'development';
 const PORT = process.env.PORT || 3000;
+const processEnv = {
+  NODE_ENV: JSON.stringify('development'),
+  PORT: JSON.stringify(process.env.PORT),
+  BASE_URL: JSON.stringify(process.env.BASE_URL),
+  DEV: JSON.stringify(process.env.DEV),
+  TEST_GLOBAL: JSON.stringify(process.env.TEST_GLOBAL),
+};
+
 
 const devConfig = {
   noInfo: true,
@@ -26,15 +34,10 @@ const devConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({ 'process.env': processEnv }),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        DEV: JSON.stringify(process.env.DEV),
-        TEST_GLOBAL: JSON.stringify(process.env.TEST_GLOBAL),
-      },
     }),
   ],
   module: {
