@@ -10,12 +10,12 @@
     "start-prod": "babel-node ./server/server.js",
     "start-dev": "npm run open:dev",
     "open:dev": "babel-watch server/server.js",
-    "clean-bin": "rimraf ./bin/*",
+    "clean-public": "rimraf ./public/*",
     "copy-server": "copyfiles -u 1 './server/**/*' ./public/",
     "copy-index": "copyfiles -u 1 './src/index.html' ./public/",
     "copy-package": "copy-files './package.json' ./public/",
-    "prebuild": "npm-run-all clean-bin copy-server copy-index copy-package",
-    "build": "NODE_ENV=production webpack"
+    "prebuild": "npm-run-all clean-public copy-server copy-index copy-package",
+    "build": "NODE_ENV=production babel-node tools/test.js"
   },
   "author": "Tobiah Rex",
   "license": "ISC",

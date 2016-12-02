@@ -39,10 +39,12 @@ app.use((req, res, next) => {
   resRef.handle = (err, data) => {
     if (err) {
       process.stdout.write(`Response Error: 😕
-${err}`);
+${err}
+`);
     } else {
       process.stdout.write(`Response Data: 😎
-${data}`);
+${data}
+`);
     }
     res.status(err ? 400 : 200).send(err || data);
   };

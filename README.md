@@ -20,7 +20,7 @@ Cannibalized from Templates and Boilerplates from around the web.
   - `npm start` for development server
   - `npm run build` for production server
 
-  NOTE: I Highly recommend running npm update --save to update package json before running "npm start" or "npm build".
+  NOTE: I Highly recommend running `npm update --save` to update package json before running `npm start` or `npm build`.
 
 ## NOTE on Reducers:
  This bp's Redux reducer methods rely on the developer to customize the logic to maintain immutability of state. This was done _intentionally_ to strengthen developers abilities in manipulating state.  If this feels cumbersome, I highly recommend using _seamless-immutable_ (refs below) to outsource this process in a very clean, and simple way.
