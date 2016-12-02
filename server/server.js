@@ -37,7 +37,13 @@ app.use((req, res, next) => {
   const resRef = res;
   resRef.socketEmitter = socketEmitter;
   resRef.handle = (err, data) => {
-    process.stdout.write('Response Error: \n', err, '\nResponse Data: ', data);
+    if (err) {
+      process.stdout.write(`Response Error: 😕
+${err}`);
+    } else {
+      process.stdout.write(`Response Data: 😎
+${data}`);
+    }
     res.status(err ? 400 : 200).send(err || data);
   };
   next();
@@ -74,5 +80,6 @@ app.get('*', (req, res) => {
 server.listen(PORT, err =>
   process.stdout.write(err || `==> 📡  Server @ ${PORT}
 `));
-mongoose.connect(MONGO, err => process.stdout.write(err || `==> 📜  MONGO @ ${MONGO}
+mongoose.connect(MONGO, err =>
+  process.stdout.write(err || `==> 📜  MONGO @ ${MONGO}
 `));
