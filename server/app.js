@@ -1,5 +1,3 @@
-/*  eslint-disable global-require  */
-
 import express from 'express';
 import path from 'path';
 import morgan from 'morgan';
@@ -11,7 +9,6 @@ const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
 const app = express();
 const api = require('./api');
-
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
