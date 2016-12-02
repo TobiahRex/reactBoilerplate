@@ -12,7 +12,6 @@ const ThingList = ({ fetching, removeThing, editThing, things, apiStatus }) => {
       apiStatus,
       data: thing,
     };
-
     return (<div key={uuid()}><Thing {...PROPS} /></div>);
   });
 
@@ -23,13 +22,11 @@ const ThingList = ({ fetching, removeThing, editThing, things, apiStatus }) => {
     </div>
   );
 };
-
 ThingList.propTypes = {
   fetching: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
-  things: PropTypes.array,
-  apiStatus: PropTypes.object,
+  things: PropTypes.arrayOf(PropTypes.any),
+  apiStatus: PropTypes.objectOf(PropTypes.object),
 };
-
 export default ThingList;
