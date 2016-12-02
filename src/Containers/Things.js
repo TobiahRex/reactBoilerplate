@@ -18,7 +18,7 @@ const Things = ({ fetching, createThing, editThing, removeThing, things, apiStat
     fetching,
     createThing,
     apiStatus,
-  }
+  };
 
   return (
     <Card>
@@ -37,13 +37,13 @@ Things.propTypes = {
   createThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
-  things: PropTypes.array.isRequired,
-  apiStatus: PropTypes.object.isRequired,
+  things: PropTypes.arrayOf(PropTypes.any),
+  apiStatus: PropTypes.objectOf(PropTypes.object.isRequired),
 };
 
-const mapStateToProps = state => ({
-  things: state.things,
-  apiStatus: state.api,
+const mapStateToProps = ({ things, api }) => ({
+  things,
+  apiStatus: api,
 });
 const mapDispatchToProps = dispatch => ({
   fetching: () => dispatch(apiActions.fetching()),
