@@ -1,4 +1,6 @@
-const router = require('express').Router();
+import express from 'express';
+
+const router = new express.Router();
 
 router.use('/things', require('./things'));
 

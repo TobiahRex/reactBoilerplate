@@ -15,4 +15,4 @@ router.route('/')
   .get((req, res) => Thing.find({}, res.handle))
   .post((req, res) => Thing.create(req.body, res.handle));
 
-module.exports = router;
+export default router;
