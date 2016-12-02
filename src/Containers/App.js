@@ -13,7 +13,7 @@ const App = ({ children }) => (
 );
 
 App.propTypes = {
-  children: PropTypes.objectOf(PropTypes.any.isRequired),
+  children: PropTypes.objectOf(PropTypes.any),
 };
 
 export default App;

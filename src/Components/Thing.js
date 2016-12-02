@@ -9,7 +9,7 @@ export default class Thing extends Component {
     data: PropTypes.object, //eslint-disable-line
     editThing: PropTypes.func.isRequired,
     removeThing: PropTypes.func.isRequired,
-    apiStatus: PropTypes.objectOf(PropTypes.object),
+    apiStatus: PropTypes.objectOf(PropTypes.any),
   }
   constructor(props) {
     super(props);
@@ -39,8 +39,8 @@ export default class Thing extends Component {
       },
       rb1: {
         onClick: this.submitEdit,
-        type: "submit",
-        label: "Submit",
+        type: 'submit',
+        label: 'Submit',
         style: styles.lftMargin,
         primary: true,
       },
@@ -49,8 +49,8 @@ export default class Thing extends Component {
           edit: false,
           data: this.props.data,
         }),
-        type: "button",
-        label: "Cancel",
+        type: 'button',
+        label: 'Cancel',
         style: styles.btnMargin,
         secondary: true,
       },

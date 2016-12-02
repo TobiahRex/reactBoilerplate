@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   const resRef = res;
   resRef.socketEmitter = socketEmitter;
   resRef.handle = (err, data) => {
-    process.stdout.write('Response Error: ', err, '\nResponse Data: ', data);
+    process.stdout.write('Response Error: \n', err, '\nResponse Data: ', data);
     res.status(err ? 400 : 200).send(err || data);
   };
   next();

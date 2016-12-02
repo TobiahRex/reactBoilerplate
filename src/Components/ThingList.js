@@ -27,6 +27,6 @@ ThingList.propTypes = {
   removeThing: PropTypes.func.isRequired,
   editThing: PropTypes.func.isRequired,
   things: PropTypes.arrayOf(PropTypes.any),
-  apiStatus: PropTypes.objectOf(PropTypes.object),
+  apiStatus: PropTypes.objectOf(PropTypes.any),
 };
 export default ThingList;

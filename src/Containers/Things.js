@@ -38,7 +38,7 @@ Things.propTypes = {
   editThing: PropTypes.func.isRequired,
   removeThing: PropTypes.func.isRequired,
   things: PropTypes.arrayOf(PropTypes.any),
-  apiStatus: PropTypes.objectOf(PropTypes.object.isRequired),
+  apiStatus: PropTypes.objectOf(PropTypes.any),
 };
 
 const mapStateToProps = ({ things, api }) => ({

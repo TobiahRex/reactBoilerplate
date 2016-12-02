@@ -4,9 +4,9 @@ import Snackbar from 'material-ui/Snackbar';
 This Component relies on a piece of state passed down in props.
 Should contain, an error & fetching boolean.
 */
-export default class muiToast extends Component {
+export default class apiSnackBar extends Component {
   static propTypes = {
-    apiStatus: PropTypes.objectOf(PropTypes.object),
+    apiStatus: PropTypes.objectOf(PropTypes.any),
   };
   constructor(props) {
     super(props);
