@@ -2,15 +2,13 @@ const path = require('path');
 const webpack = require('webpack');
 
 const BUILD = process.env.NODE_ENV || 'development';
-const PORT = process.env.PORT || 3000;
 const processEnv = {
   NODE_ENV: JSON.stringify('development'),
-  PORT: JSON.stringify(process.env.PORT),
+  PORT: JSON.stringify(process.env.PORT || 3000),
   BASE_URL: JSON.stringify(process.env.BASE_URL),
   DEV: JSON.stringify(process.env.DEV),
   TEST_GLOBAL: JSON.stringify(process.env.TEST_GLOBAL),
 };
-
 
 const devConfig = {
   noInfo: true,
@@ -95,7 +93,7 @@ const devConfig = {
 };
 
 const prodConfig = {
-  devtool: 'eval',
+  devtool: 'source-map',
   noInfo: true,
   debug: true,
   target: 'web',
@@ -104,7 +102,7 @@ const prodConfig = {
   ],
   output: {
     path: path.join(__dirname, 'bin', 'public'),
-    publicPath: `http://localhost:${PORT}/`,
+    publicPath: '/',
     filename: 'bundle.js',
   },
   plugins: [
