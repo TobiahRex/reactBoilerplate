@@ -3,6 +3,11 @@ import path from 'path';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import webpack from 'webpack';
+import hotMiddleware from 'webpack-hot-middleware';
+import devMiddleware from 'webpack-dev-middleware';
+import webpackConfig from '../webpack.config';
 
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
@@ -23,19 +28,15 @@ app.use((req, res, next) => {
 });
 
 if (BUILD === 'development') {
-  require('dotenv').load();
+  dotenv.config({ silent: true });
   process.env.DEV = 'development';
-  const webpack = require('webpack');
-  const hotMiddleware = require('webpack-hot-middleware');
-  const devMiddleware = require('webpack-dev-middleware');
-  const config = require('../webpack.config');
-  const compiler = webpack(config);
+  const compiler = webpack(webpackConfig);
 
   app.use(devMiddleware(
     compiler,
     {
       noInfo: true,
-      publicPath: config.output.publicPath,
+      publicPath: webpackConfig.output.publicPath,
     })
   );
   app.use(hotMiddleware(compiler));
