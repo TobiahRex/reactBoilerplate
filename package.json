@@ -25,6 +25,7 @@
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.5",
     "babel-plugin-react-display-name": "^2.0.0",
     "babel-plugin-transform-react-jsx-source": "^6.9.0",

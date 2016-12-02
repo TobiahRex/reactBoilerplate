@@ -1,10 +1,13 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Snackbar from 'material-ui/Snackbar';
 /*
 This Component relies on a piece of state passed down in props.
 Should contain, an error & fetching boolean.
 */
-export default class muiToast extends React.Component {
+export default class muiToast extends Component {
+  static propTypes = {
+    apiStatus: PropTypes.objectOf(PropTypes.object),
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +67,7 @@ export default class muiToast extends React.Component {
       open: this.state.show,
       message: this.state.message,
       autoHideDuration: 2000,
-      onRequestClose: () => this.setState({ show: false })
+      onRequestClose: () => this.setState({ show: false }),
     };
     return (
       <div>
@@ -73,7 +76,3 @@ export default class muiToast extends React.Component {
     );
   }
 }
-
-muiToast.propTypes = {
-  apiStatus: PropTypes.object, // eslint-disable-line
-};
