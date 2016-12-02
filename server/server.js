@@ -12,19 +12,21 @@ import socketIO from 'socket.io';
 import webpackConfig from '../webpack.config';
 import api from './api';
 
+// ---------------------------- CONFIG -----------------------------------------
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
 const app = express();
 const server = new http.Server(app);
 const io = socketIO(server);
+
 let socketEmitter;
 io.on('connection', (socket) => {
   process.stdout.write('\n>>> Socket Connection!\n');
   socketEmitter = (type, data) => socket.emit(type, data);
 });
 
-
+// ---------------------- Express Middleware -----------------------------------
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -65,6 +67,8 @@ app.get('*', (req, res) => {
   process.stdout.write('📁 indexFile = ', indexFile);
   res.sendFile(indexFile);
 });
+
+// --------------------------- Listeners ---------------------------------------
 server.listen(PORT, err =>
   process.stdout.write(err || `==> 📡  Server @ ${PORT}
 `));
