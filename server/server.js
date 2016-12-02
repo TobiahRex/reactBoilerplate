@@ -1,4 +1,5 @@
 import express from 'express';
+import http from 'http';
 import path from 'path';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
@@ -7,20 +8,31 @@ import dotenv from 'dotenv';
 import webpack from 'webpack';
 import hotMiddleware from 'webpack-hot-middleware';
 import devMiddleware from 'webpack-dev-middleware';
+import socketIO from 'socket.io';
 import webpackConfig from '../webpack.config';
+import api from './api';
 
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
 const app = express();
-const api = require('./api');
+const server = new http.Server(app);
+const io = socketIO(server);
+let socketEmitter;
+io.on('connection', (socket) => {
+  process.stdout.write('\n>>> Socket Connection!\n');
+  socketEmitter = (type, data) => socket.emit(type, data);
+});
+
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use((req, res, next) => {
-  res.handle = (err, data) => {
+  const resRef = res;
+  resRef.socketEmitter = socketEmitter;
+  resRef.handle = (err, data) => {
     process.stdout.write('Response Error: ', err, '\nResponse Data: ', data);
     res.status(err ? 400 : 200).send(err || data);
   };
@@ -53,7 +65,7 @@ app.get('*', (req, res) => {
   process.stdout.write('📁 indexFile = ', indexFile);
   res.sendFile(indexFile);
 });
-app.listen(PORT, err =>
+server.listen(PORT, err =>
   process.stdout.write(err || `==> 📡  Server @ ${PORT}
 `));
 mongoose.connect(MONGO, err => process.stdout.write(err || `==> 📜  MONGO @ ${MONGO}

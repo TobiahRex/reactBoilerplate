@@ -40,3 +40,6 @@ Cannibalized from Templates and Boilerplates from around the web.
 * [David Durbina's React/Express Boilerplate](https://github.com/WindUpDurb/React-Express-Boilerplate).
 
 ## Updates:
+* December 1st 2016:
+  - Added `babel-plugin-transform-react-jsx-source` to "devDependencies".
+  - Renamed `app.js` to `server.js` & added deep modifications.
