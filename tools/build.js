@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import webpackConfig from '../webpack.config';
 import colors from 'colors';
-console.log('webpackConfig: ', webpackConfig);
+
 process.stdout.write('⏲  Generating minified bundle for production via Webpack. This will take a moment...\n'.white.bold);
 
 webpack(webpackConfig).run((err, stats) => {

@@ -13,7 +13,7 @@ fs.readFile('src/index.html', (err, markup) => {
   fs.writeFile('dist/index.html', $.html(), 'utf8', (error) => {
     process.stdout.write('\n');
     if (error) return process.stdout.write(`❌  fs.readFile ERROR: ${error}`.red.bold);
-    return process.stdout.write('\n ✅  index.html written to "/dist"'.green.bold);
+    return process.stdout.write('\n ✅  index.html written to "/dist"\n'.green.bold);
   });
   return 1;
 });
