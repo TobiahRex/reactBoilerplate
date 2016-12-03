@@ -45,6 +45,8 @@ Cannibalized from Templates and Boilerplates from around the web.
 ## Updates:
 * December 1st 2016:
   - Extensive refactor to entire project.  WARNING in the process of re-factoring package.json and webpack.config for smoother deployment however process is not yet complete.  Will update here when it's finished and GTG.
+* December 2nd 2016:
+  - Finished major refactor and deployment. Click the "DEMO" link above to check out the latest working version.  Thanks for the interest.
 
 ## ScreenShots:
 * Terminal
