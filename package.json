@@ -14,10 +14,10 @@
     "remove-dist": "rimraf ./dist && mkdir dist",
     "copy-images": "copyfiles -u 1 './src/Images/**' ./dist/",
     "copy-package": "copyfiles 'package.json' ./dist/",
-    "prebuild": "NODE_ENV=production",
+    "prebuild": "npm run remove-dist",
     "build:html": "babel-node ./tools/buildHtml.js",
     "build:bundle": "babel-node ./tools/build.js",
-    "build": "npm-run-all build:html build:bundle remove-dist copy-images open:dist"
+    "build": "NODE_ENV=production npm-run-all build:html build:bundle copy-images open:dist"
   },
   "author": "Tobiah Rex",
   "license": "ISC",

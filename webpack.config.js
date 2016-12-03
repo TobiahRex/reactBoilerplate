@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ silent: true });
 const BUILD = process.env.NODE_ENV;
+console.log('BUILD: ', BUILD);
 
 const envs = {
   development: {
