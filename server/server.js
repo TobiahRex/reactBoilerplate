@@ -4,8 +4,8 @@ import path from 'path';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import webpack from 'webpack';
+import dotenv from 'dotenv';
 import hotMiddleware from 'webpack-hot-middleware';
 import devMiddleware from 'webpack-dev-middleware';
 import socketIO from 'socket.io';
@@ -14,6 +14,7 @@ import api from './api';
 
 // ---------------------------- CONFIG -----------------------------------------
 mongoose.Promise = Promise;
+dotenv.config({ silent: true });
 const PORT = process.env.PORT || 3001;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
@@ -52,17 +53,12 @@ ${data}
 });
 
 if (BUILD === 'development') {
-  dotenv.config({ silent: true });
-  process.env.DEV = 'development';
   const compiler = webpack(webpackConfig);
 
-  app.use(devMiddleware(
-    compiler,
-    {
-      noInfo: true,
-      publicPath: webpackConfig.output.publicPath,
-    })
-  );
+  app.use(devMiddleware(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+  }));
   app.use(hotMiddleware(compiler));
 }
 

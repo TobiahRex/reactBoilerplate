@@ -3,13 +3,20 @@ import webpack from 'webpack';
 import dotenv from 'dotenv';
 
 dotenv.config({ silent: true });
+const BUILD = process.env.NODE_ENV;
 
-const BUILD = process.env.NODE_ENV || 'development';
-const processEnv = {
-  NODE_ENV: JSON.stringify('development'),
-  PORT: JSON.stringify(process.env.PORT || 3001),
-  BASE_URL: JSON.stringify(process.env.BASE_URL),
-  DEV: JSON.stringify(process.env.DEV),
+const envs = {
+  development: {
+    NODE_ENV: JSON.stringify(BUILD),
+    PORT: JSON.stringify(3001),
+    BASE_URL: JSON.stringify(process.env.BASE_URL),
+    DEV: JSON.stringify(process.env.DEV),
+  },
+  production: {
+    NODE_ENV: JSON.stringify(BUILD),
+    PORT: JSON.stringify(process.env.PORT),
+    DEPLOY_URL: JSON.stringify(process.env.DEPLOY_URL),
+  },
 };
 
 const devConfig = {
@@ -34,7 +41,7 @@ const devConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({ 'process.env': processEnv }),
+    new webpack.DefinePlugin({ 'process.env': envs.development }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
@@ -51,6 +58,10 @@ const devConfig = {
       {
         test: /(\.css)$/,
         loaders: ['style', 'css'],
+      },
+      {
+        test: /\.s[ac]ss$/,
+        loaders: ['style', 'css', 'sass', 'postcss-loader'],
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
@@ -109,10 +120,10 @@ const prodConfig = {
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin({ 'process.env': processEnv }),
+    new webpack.DefinePlugin({ 'process.env': envs.production }),
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
@@ -124,6 +135,10 @@ const prodConfig = {
         loader: 'babel-loader',
         exclude: /(node_modules|bower_components)/,
         include: path.resolve('src'),
+      },
+      {
+        test: /\.s[ac]ss$/,
+        loaders: ['style', 'css', 'sass', 'postcss-loader'],
       },
       {
         test: /\.css$/,
