@@ -1,5 +1,5 @@
-# _React Boilerplate: Full-Stack_
-Full-Stack REACT & Redux - Created: 6 October 2016 [DEMO it here](https://trex-rbp.herokuapp.com/)
+# _React Boilerplate: Full-Stack_ [DEMO](https://trex-rbp.herokuapp.com/)
+Full-Stack REACT & Redux - Created: 6 October 2016
 <!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
 <img src="http://imgur.com/dTXjfrU.png" />
 
