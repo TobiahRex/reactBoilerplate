@@ -37,9 +37,11 @@ app.use('/api', api);
 app.get('*', (req, res) => res.sendFile(path.resolve('dist/index.html')));
 
 // --------------------------- Listeners ---------------------------------------
-server.listen(process.env.PORT, err =>
-  process.stdout.write(err || `==> 📡  Server @ ${process.env.PORT}
+const PORT = process.env.PORT || 3000;
+const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
+server.listen(PORT, err =>
+  process.stdout.write(err || `==> 📡  Server @ ${PORT}
 `));
-mongoose.connect(process.env.MONGODB_URI, err =>
-  process.stdout.write(err || `==> 📜  MONGO @ ${process.env.MONGODB_URI}
+mongoose.connect(MONGO, err =>
+  process.stdout.write(err || `==> 📜  MONGO @ ${MONGO}
 `));

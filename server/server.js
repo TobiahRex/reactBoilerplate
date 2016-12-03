@@ -15,7 +15,7 @@ import api from './api';
 // ---------------------------- CONFIG -----------------------------------------
 mongoose.Promise = Promise;
 dotenv.config({ silent: true });
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const MONGO = process.env.MONGODB_URI || 'mongodb://localhost/template';
 const BUILD = process.env.NODE_ENV || 'development';
 const app = express();

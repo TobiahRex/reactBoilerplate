@@ -10,7 +10,6 @@ const envs = {
     NODE_ENV: JSON.stringify(BUILD),
     PORT: JSON.stringify(3001),
     BASE_URL: JSON.stringify(process.env.BASE_URL),
-    DEV: JSON.stringify(process.env.DEV),
   },
   production: {
     NODE_ENV: JSON.stringify(BUILD),
@@ -26,11 +25,11 @@ const devConfig = {
   debug: true,
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    './src/Styles/style.css',
+    './src/Styles/style.scss',
     './src/index.js',
   ],
   output: {
-    path: path.resolve('build'),
+    path: path.resolve('public'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -111,10 +110,11 @@ const prodConfig = {
   debug: true,
   target: 'web',
   entry: [
-    './src/index',
+    './src/Styles/style.scss',
+    './src/index.js',
   ],
   output: {
-    path: path.resolve('bin', 'public'),
+    path: path.resolve('dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
