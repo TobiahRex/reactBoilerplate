@@ -3,7 +3,7 @@
   "version": "1.5.0",
   "description": "react-template",
   "main": "index.js",
-  "repository": "",
+  "repository": "https://github.com/TobiahRex/reactBoilerplate.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "if test \"$NODE_ENV\" = \"production\" ; then npm run start-prod; else npm run start-dev; fi ",
@@ -11,7 +11,8 @@
     "start-prod": "babel-node tools/distServer.js",
     "open:dev": "babel-watch server/server.js",
     "open:dist": "babel-node tools/distServer.js",
-    "clean-dist": "rimraf dist/*",
+    "remove-dist": "rimraf dist",
+    "clean-dist": "npm run remove-dist && mkdir dist",
     "copy-images": "copyfiles -u 1 'src/Images/**' dist/images/",
     "copy-index": "copyfiles -u 1 'src/index.html' dist/",
     "copy-package": "copyfiles 'package.json' dist/",
