@@ -63,16 +63,7 @@ if (BUILD === 'development') {
 }
 
 app.use('/api', api);
-app.get('*', (req, res) => {
-  if (BUILD === 'development') {
-    indexFile = path.resolve('./src/index.html');
-  } else {
-    indexFile = path.resolve('./src/index.html');
-  }
-  process.stdout.write(`==> 📁  indexFile = ${indexFile}
-`);
-  res.sendFile(indexFile);
-});
+app.get('*', (req, res) => res.sendFile(path.resolve('./src/index.html')));
 
 // --------------------------- Listeners ---------------------------------------
 server.listen(PORT, err =>
