@@ -21,6 +21,7 @@ Cannibalized from Templates and Boilerplates from around the web.
     * BASE_URL=http://localhost:3000/
     * DEPLOY_URL=(your deployed url)
     * NODE_ENV=development
+
     WARNING: You will not successfully spin up the app without doing this step.
   - `npm start` for development server
     * Once the "webpack built xxxxxx..." message appears (May take a few moments) the app will start.
