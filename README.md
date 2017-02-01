@@ -19,7 +19,7 @@ Cannibalized from Templates and Boilerplates from around the web.
   - `npm i` to install dependencies
   - touch a ".env" file and add 3 variables
     * BASE_URL=http://localhost:3000/
-    * DEPLOY_URL=<your deployed url>
+    * DEPLOY_URL=(your deployed url)
     * NODE_ENV=development
     WARNING: You will not successfully spin up the app without doing this step.
   - `npm start` for development server
