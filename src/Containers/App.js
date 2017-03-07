@@ -6,7 +6,7 @@ import { AppBar } from 'material-ui';
 const App = ({ children }) => (
   <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
     <div>
-      <AppBar title="React Template" />
+      <AppBar title="React Boilerplate" />
       {children}
     </div>
   </MuiThemeProvider>
