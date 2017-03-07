@@ -22,7 +22,7 @@ const Things = ({ fetching, createThing, editThing, removeThing, things, apiStat
 
   return (
     <Card>
-      <CardHeader title="React Template" subtitle="API">
+      <CardHeader title="React Boilerplate" subtitle="by @TobiahRex">
         <InputNewThing {...propsInputNew} />
       </CardHeader>
       <CardText>
