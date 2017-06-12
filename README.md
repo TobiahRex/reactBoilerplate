@@ -11,26 +11,23 @@ Cannibalized from Templates and Boilerplates from around the web.
   * Uses _redux-logger_ to allow for informative workflow from the devtools console.  
   * Uses _redux-devtools-extension_ to allow for a macro perspective picture of your current store's state.
     - <img src="http://i.imgur.com/GD4VCkW.png" />
-  * Configured for front end environment variables using webpack.DefinePlugin().
   * Airbnb Style Guide implemented.
 
 ## Setup:
-  - `npm i` to install dependencies
+  - `yarn || npm i` to install dependencies
   - touch a ".env" file and add 3 variables
-    * BASE_URL=http://localhost:3000/
-    * DEPLOY_URL=(your deployed url)
-    * NODE_ENV=development
+    * See **.env_copy** for reference.
+      * BASE_URL=http://localhost:3000/
+      * DEPLOY_URL=(your deployed url)
+      * NODE_ENV=development
       - WARNING: You will not successfully spin up the app without doing this step.
-  - `npm start` for development server
+  - `yarn start || npm start` for development server
     * Once the "webpack built xxxxxx..." message appears (May take a few moments) the app will start.
-  - `npm run build` for production server
+  - `yarn build || npm run build` for production server
     * This command will automatically change the NODE_ENV env variable to "production" and set off a chain of events for creating a bundle for production.
 
 
-  NOTE: I Highly recommend running `npm update --save` to update package json before running `npm start` or `npm build`.
-
-## NOTE on Reducers:
- This bp's Redux reducer methods rely on the developer to customize the logic to maintain immutability of state. This was done _intentionally_ to strengthen developers abilities in manipulating state.  If this feels cumbersome, I highly recommend using _seamless-immutable_ (refs below) to outsource this process in a very clean, and simple way.
+  NOTE: I Highly recommend running `yarn upgrade || npm update --save` to update package json before running `yarn start || npm start` or `yarn build || npm build`.
 
 ## NOTE about **babel-polyfill** Error
  There is an error the appears in the dev console in development saying there are multiple instances of _babel-polyfill__ found.  This is normal and a by-product of using redux-saga's which require stag-0 regenerator compatibility.  This error will disappear when using creating a production build.  
