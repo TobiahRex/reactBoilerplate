@@ -29,8 +29,8 @@ Cannibalized from Templates and Boilerplates from around the web.
 
   NOTE: I Highly recommend running `yarn upgrade || npm update --save` to update package json before running `yarn start || npm start` or `yarn build || npm build`.
 
-## NOTE about **babel-polyfill** Error
- There is an error the appears in the dev console in development saying there are multiple instances of _babel-polyfill__ found.  This is normal and a by-product of using redux-saga's which require stag-0 regenerator compatibility.  This error will disappear when using creating a production build.  
+## NOTE about _babel-polyfill_ Error
+ There is an error that appears in the dev console in development saying there are multiple instances of _babel-polyfill__ found.  This is normal and a by-product of using redux-saga's which require stag-0 regenerator compatibility.  This error will disappear when using creating a production build.  
 
 ## Helper Libraries:
 * [apisauce](https://github.com/skellock/apisauce)
