@@ -61,6 +61,8 @@ Cannibalized from Templates and Boilerplates from around the web.
   - Added **yarn.lock** file.
   - Reconfigured _PropTypes_ import from **react** to **prop-types**.
   - Refactored syntax throughout entire project.
+  - Webpack Code splitting for **common**, **vendor** & **app** bundles.
+    * One can easily enable router based code splitting using `System.import()` if desired.
 
 ## ScreenShots:
 * Terminal
