@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardText } from 'material-ui';
-import thingActions from '../Redux/ThingRedux';
-import apiActions from '../Redux/ApiRedux';
-import ThingList from '../Components/ThingList';
-import InputNewThing from '../Components/InputNewThing';
+import thingActions from '../../redux/thing';
+import apiActions from '../../redux/api';
+import ThingList from '../../components/thingList/';
+import InputNewThing from '../../components/inputNewThing/';
 
 const Things = ({ fetching, createThing, editThing, removeThing, things, apiStatus }) => {
   const propsThingList = {
@@ -31,14 +32,14 @@ const Things = ({ fetching, createThing, editThing, removeThing, things, apiStat
     </Card>
   );
 };
-
+const { func, arrayOf, objectOf, any } = PropTypes;
 Things.propTypes = {
-  fetching: PropTypes.func.isRequired,
-  createThing: PropTypes.func.isRequired,
-  editThing: PropTypes.func.isRequired,
-  removeThing: PropTypes.func.isRequired,
-  things: PropTypes.arrayOf(PropTypes.any),
-  apiStatus: PropTypes.objectOf(PropTypes.any),
+  fetching: func.isRequired,
+  createThing: func.isRequired,
+  editThing: func.isRequired,
+  removeThing: func.isRequired,
+  things: arrayOf(any),
+  apiStatus: objectOf(any),
 };
 
 const mapStateToProps = ({ things, api }) => ({

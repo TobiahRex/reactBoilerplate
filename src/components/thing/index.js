@@ -1,15 +1,21 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { TextField, RaisedButton } from 'material-ui';
 import uuid from 'uuid';
-import styles from './Styles/ThingStyles';
+import styles from './assets/thingStyles';
+
+const { func, objectOf, shape, string, any } = PropTypes;
 
 export default class Thing extends Component {
   static propTypes = {
-    fetching: PropTypes.func.isRequired,
-    data: PropTypes.object, //eslint-disable-line
-    editThing: PropTypes.func.isRequired,
-    removeThing: PropTypes.func.isRequired,
-    apiStatus: PropTypes.objectOf(PropTypes.any),
+    fetching: func.isRequired,
+    data: shape({
+      _id: string,
+      name: string,
+    }),
+    editThing: func.isRequired,
+    removeThing: func.isRequired,
+    apiStatus: objectOf(any),
   }
   constructor(props) {
     super(props);
@@ -74,8 +80,8 @@ export default class Thing extends Component {
       },
       rb1: {
         onClick: () => this.setState({ edit: true }),
-        type: "button",
-        label: "Edit",
+        type: 'button',
+        label: 'Edit',
         style: styles.lftMargin,
         primary: true,
       },
@@ -84,8 +90,8 @@ export default class Thing extends Component {
           this.props.fetching();
           this.props.removeThing(this.props.data._id);
         },
-        type: "button",
-        label: "Remove",
+        type: 'button',
+        label: 'Remove',
         style: styles.btnMargin,
         secondary: true,
       },

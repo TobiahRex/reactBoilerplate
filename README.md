@@ -1,6 +1,5 @@
 # _React Boilerplate:_ [DEMO](https://trex-rbp.herokuapp.com/)
 Full-Stack REACT & Redux - Created: 6 October 2016
-<!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
 <img src="http://imgur.com/dTXjfrU.png" />
 
 
@@ -33,6 +32,9 @@ Cannibalized from Templates and Boilerplates from around the web.
 ## NOTE on Reducers:
  This bp's Redux reducer methods rely on the developer to customize the logic to maintain immutability of state. This was done _intentionally_ to strengthen developers abilities in manipulating state.  If this feels cumbersome, I highly recommend using _seamless-immutable_ (refs below) to outsource this process in a very clean, and simple way.
 
+## NOTE about **babel-polyfill** Error
+ There is an error the appears in the dev console in development saying there are multiple instances of _babel-polyfill__ found.  This is normal and a by-product of using redux-saga's which require stag-0 regenerator compatibility.  This error will disappear when using creating a production build.  
+
 ## Helper Libraries:
 * [apisauce](https://github.com/skellock/apisauce)
 * [redux-logger](https://github.com/evgenyrodionov/redux-logger)
@@ -55,6 +57,13 @@ Cannibalized from Templates and Boilerplates from around the web.
   - Extensive refactor to entire project.  WARNING in the process of re-factoring package.json and webpack.config for smoother deployment however process is not yet complete.  Will update here when it's finished and GTG.
 * December 2nd 2016:
   - Finished major refactor and deployment. Click the "DEMO" link above to check out the latest working version.  Thanks for the interest.
+* June 11th 2017 = MAJOR OVERHAUL!
+  - Updated **package.json**.
+  - Updated **webpack.config.js** for using Webpack 2.0.
+  - Updated folder structure.
+  - Added **yarn.lock** file.
+  - Reconfigured _PropTypes_ import from **react** to **prop-types**.
+  - Refactored syntax throughout entire project.
 
 ## ScreenShots:
 * Terminal

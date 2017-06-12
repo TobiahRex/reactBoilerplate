@@ -1,4 +1,5 @@
 import { createActions, createReducer } from 'reduxsauce';
+import Immutable from 'seamless-immutable';
 
 // ------- Types & Creators ------- //
 const { Types, Creators } = createActions({
@@ -17,7 +18,7 @@ const { Types, Creators } = createActions({
 // ------- Initial State ------- //
 export const ThingTypes = Types;
 export default Creators;
-export const INITIAL_STATE = [];
+export const INITIAL_STATE = Immutable([]);
 
 // ------- Response Actions ------- //
 const getAllThingsSuccess = (state, { things }) => things || [];

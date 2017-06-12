@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import { AppBar } from 'material-ui';
@@ -11,9 +12,9 @@ const App = ({ children }) => (
     </div>
   </MuiThemeProvider>
 );
-
+const { objectOf, any } = PropTypes;
 App.propTypes = {
-  children: PropTypes.objectOf(PropTypes.any),
+  children: objectOf(any),
 };
 
 export default App;
