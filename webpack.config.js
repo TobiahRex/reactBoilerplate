@@ -76,13 +76,30 @@ const devConfig = {
   module: {
     rules: [
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/ },
-      { test: /(\.css|\.s[ac]ss)$/, loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader', 'sass-loader?sourceMap'] },
+      {
+        test: /(\.css|\.s[ac]ss)$/,
+        loaders: [
+          'style-loader',
+          'css-loader?sourceMap',
+          'postcss-loader',
+          'sass-loader?sourceMap',
+        ],
+      },
       { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]' },
       { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader' },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
-      { test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+      },
       { test: /\.ico$/, loader: 'file-loader?name=[name].[ext]' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      },
       { test: require.resolve('react-addons-perf'), loader: 'expose-loader?Perf' },
     ],
   },
@@ -164,15 +181,27 @@ const prodConfig = {
   module: {
     rules: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /(\.css|\.s[ac]ss)$/, loader: ExtractTextPlugin.extract('css-loader?sourceMap!postcss-loader!sass-loader') },
+      {
+        test: /(\.css|\.s[ac]ss)$/,
+        loader: ExtractTextPlugin.extract('css-loader?sourceMap!postcss-loader!sass-loader'),
+      },
       { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?name=[name].[ext]' },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]' },
-      { test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[name].[ext]' },
-      { test: /\.svg(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]' },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]',
+      },
+      {
+        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[name].[ext]',
+      },
+      {
+        test: /\.svg(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',
+      },
       { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]' },
       { test: require.resolve('react-addons-perf'), loader: 'expose-loader?Perf' },
     ],
   },
 };
 
-export default (process.env.NODE_ENV === 'production') ? prodConfig : devConfig;
+export default (process.env.NODE_ENV === 'production' ? prodConfig : devConfig);
