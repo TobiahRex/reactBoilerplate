@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from '../Containers/App';
-import Things from '../Containers/Things';
+import App from '../App/';
+import Things from '../containers/things/';
 
 export default (
   <Route path="/" component={App}>

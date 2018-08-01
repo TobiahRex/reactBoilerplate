@@ -1,44 +1,35 @@
+/* eslint-disable no-console */
 import { create } from 'apisauce';
 
-// --------------------------------------------------------
-let baseURL;
-if (process.env.NODE_ENV === 'production') {
-  baseURL = `${process.env.DEPLOY_URL}`;
-} else {
-  baseURL = process.env.BASE_URL;
-}
-console.info('baseURL: ', baseURL);
+const {
+  NODE_ENV,
+  BASE_URL,
+  DEPLOY_URL,
+} = process.env;
 
-// --------------------------------------------------------
-const createAPI = () => {
+function createAPI() {
   const api = create({
-    baseURL,
+    baseURL: NODE_ENV === 'production' ? DEPLOY_URL : BASE_URL,
     headers: {
       'Cache-Control': 'no-cache',
     },
+    credentials: 'omit',
   });
 
-  // --------------------------------------------------------
-  const getAllThings = () =>
-  api.get('api/things/');
+  const getAllThings = () => api.get('api/things/');
 
-  const createThing = thing =>
-  api.post('api/things', { name: thing.name });
+  const createThing = ({ name }) => api.post('api/things', { name });
 
-  const removeThing = id =>
-  api.delete(`api/things/${id}`);
+  const removeThing = id => api.delete(`api/things/${id}`);
 
-  const editThing = thing =>
-  api.put(`api/things/${thing._id}`, { name: thing.name });
+  const editThing = ({ name, _id }) => api.put(`api/things/${_id}`, { name });
 
-  // --------------------------------------------------------
   return {
-    getAllThings,
+    editThing,
     createThing,
     removeThing,
-    editThing,
+    getAllThings,
   };
-};
+}
 
-// --------------------------------------------------------
 export default { createAPI };

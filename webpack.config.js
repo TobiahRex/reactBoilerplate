@@ -73,6 +73,17 @@ const devConfig = {
         context: '/',
         postcss: () => [autoprefixer]
       }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: false,
+      noInfo: true,
+      options: {
+        sassLoader: {
+          includePaths: [path.resolve('src', 'scss')]
+        },
+        context: '/',
+        postcss: () => [autoprefixer]
+      }
     })
   ],
   module: {
@@ -193,6 +204,10 @@ const prodConfig = {
         loader: ExtractTextPlugin.extract(
           'css-loader?sourceMap!postcss-loader!sass-loader'
         )
+      },
+      {
+        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?name=[name].[ext]'
       },
       {
         test: /\.eot(\?v=\d+.\d+.\d+)?$/,

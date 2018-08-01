@@ -1,6 +1,5 @@
 # _React Boilerplate:_ [DEMO](https://trex-rbp.herokuapp.com/)
 Full-Stack REACT & Redux - Created: 6 October 2016
-<!-- ### Deployed on Heroku [here](https://itiner-ez.herokuapp.com/). -->
 <img src="http://imgur.com/dTXjfrU.png" />
 
 
@@ -12,27 +11,26 @@ Cannibalized from Templates and Boilerplates from around the web.
   * Uses _redux-logger_ to allow for informative workflow from the devtools console.  
   * Uses _redux-devtools-extension_ to allow for a macro perspective picture of your current store's state.
     - <img src="http://i.imgur.com/GD4VCkW.png" />
-  * Configured for front end environment variables using webpack.DefinePlugin().
   * Airbnb Style Guide implemented.
 
 ## Setup:
-  - `npm i` to install dependencies
+  - `yarn || npm i` to install dependencies
   - touch a ".env" file and add 3 variables
-    * BASE_URL=http://localhost:3000/
-    * DEPLOY_URL=(your deployed url)
-    * NODE_ENV=development
-
-    WARNING: You will not successfully spin up the app without doing this step.
-  - `npm start` for development server
+    * See **.env_copy** for reference.
+      * BASE_URL=http://localhost:3000/
+      * DEPLOY_URL=(your deployed url)
+      * NODE_ENV=development
+      - WARNING: You will not successfully spin up the app without doing this step.
+  - `yarn start || npm start` for development server
     * Once the "webpack built xxxxxx..." message appears (May take a few moments) the app will start.
-  - `npm run build` for production server
+  - `yarn build || npm run build` for production server
     * This command will automatically change the NODE_ENV env variable to "production" and set off a chain of events for creating a bundle for production.
 
 
-  NOTE: I Highly recommend running `npm update --save` to update package json before running `npm start` or `npm build`.
+  NOTE: I Highly recommend running `yarn upgrade || npm update --save` to update package json before running `yarn start || npm start` or `yarn build || npm build`.
 
-## NOTE on Reducers:
- This bp's Redux reducer methods rely on the developer to customize the logic to maintain immutability of state. This was done _intentionally_ to strengthen developers abilities in manipulating state.  If this feels cumbersome, I highly recommend using _seamless-immutable_ (refs below) to outsource this process in a very clean, and simple way.
+## NOTE about _babel-polyfill_ Error
+ There is an error that appears in the dev console in development saying there are multiple instances of _babel-polyfill__ found.  This is normal and a by-product of using redux-saga's which require stag-0 regenerator compatibility.  This error will disappear when using creating a production build.  
 
 ## Helper Libraries:
 * [apisauce](https://github.com/skellock/apisauce)
@@ -56,6 +54,15 @@ Cannibalized from Templates and Boilerplates from around the web.
   - Extensive refactor to entire project.  WARNING in the process of re-factoring package.json and webpack.config for smoother deployment however process is not yet complete.  Will update here when it's finished and GTG.
 * December 2nd 2016:
   - Finished major refactor and deployment. Click the "DEMO" link above to check out the latest working version.  Thanks for the interest.
+* June 11th 2017 = MAJOR OVERHAUL!
+  - Updated **package.json**.
+  - Updated **webpack.config.js** for using Webpack 2.0.
+  - Updated folder structure.
+  - Added **yarn.lock** file.
+  - Reconfigured _PropTypes_ import from **react** to **prop-types**.
+  - Refactored syntax throughout entire project.
+  - Webpack Code splitting for **common**, **vendor** & **app** bundles.
+    * One can easily enable router based code splitting using `System.import()` if desired.
 
 ## ScreenShots:
 * Terminal
