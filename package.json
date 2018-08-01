@@ -6,7 +6,8 @@
   "repository": "https://github.com/TobiahRex/reactBoilerplate.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "if test \"$NODE_ENV\" = \"production\" ; then npm run start-prod; else npm run start-dev; fi ",
+    "start":
+      "if test \"$NODE_ENV\" = \"production\" ; then npm run start-prod; else npm run start-dev; fi ",
     "start-dev": "npm run open:dev",
     "start-prod": "babel-node ./tools/distServer.js",
     "open:dev": "babel-watch ./server/server.js",
@@ -17,7 +18,8 @@
     "prebuild": "npm run remove-dist",
     "build:html": "babel-node ./tools/buildHtml.js",
     "build:bundle": "babel-node ./tools/build.js",
-    "build": "NODE_ENV=production npm-run-all build:html build:bundle copy-images open:dist"
+    "build":
+      "NODE_ENV=production npm-run-all build:html build:bundle copy-images open:dist"
   },
   "author": "Tobiah Rex",
   "license": "ISC",

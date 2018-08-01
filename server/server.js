@@ -1,3 +1,6 @@
+/* eslint-disable import/first, no-console */
+
+console.clear();
 import express from 'express';
 import http from 'http';
 import path from 'path';
@@ -24,7 +27,7 @@ const io = socketIO(server);
 let indexFile;
 let socketEmitter;
 
-io.on('connection', (socket) => {
+io.on('connection', socket => {
   process.stdout.write('\n>>> Socket Connection!\n');
   socketEmitter = (type, data) => socket.emit(type, data);
 });
@@ -55,10 +58,12 @@ ${data}
 if (BUILD === 'development') {
   const compiler = webpack(webpackConfig);
 
-  app.use(devMiddleware(compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath,
-  }));
+  app.use(
+    devMiddleware(compiler, {
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath
+    })
+  );
   app.use(hotMiddleware(compiler));
 }
 
@@ -67,8 +72,18 @@ app.get('*', (req, res) => res.sendFile(path.resolve('./src/index.html')));
 
 // --------------------------- Listeners ---------------------------------------
 server.listen(PORT, err =>
-  process.stdout.write(err || `==> 📡  Server @ ${PORT}
-`));
-mongoose.connect(MONGO, err =>
-  process.stdout.write(err || `==> 📜  MONGO @ ${MONGO}
-`));
+  process.stdout.write(
+    err ||
+      `==> 📡  Server @ ${PORT}
+`
+  )
+);
+mongoose.connect(
+  MONGO,
+  err =>
+    process.stdout.write(
+      err ||
+        `==> 📜  MONGO @ ${MONGO}
+`
+    )
+);
