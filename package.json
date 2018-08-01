@@ -6,8 +6,7 @@
   "repository": "https://github.com/TobiahRex/reactBoilerplate.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":
-      "if test \"$NODE_ENV\" = \"production\" ; then npm run start-prod; else npm run start-dev; fi ",
+    "start": "if test \"$NODE_ENV\" = \"production\" ; then npm run start-prod; else npm run start-dev; fi ",
     "start-dev": "npm run open:dev",
     "start-prod": "babel-node ./tools/distServer.js",
     "open:dev": "babel-watch ./server/server.js",
@@ -18,12 +17,12 @@
     "prebuild": "npm run remove-dist",
     "build:html": "babel-node ./tools/buildHtml.js",
     "build:bundle": "babel-node ./tools/build.js",
-    "build":
-      "NODE_ENV=production npm-run-all build:html build:bundle copy-images open:dist"
+    "build": "NODE_ENV=production npm-run-all build:html build:bundle copy-images open:dist"
   },
   "author": "Tobiah Rex",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^9.0.2",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.1.1",
@@ -46,21 +45,28 @@
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.3.0",
+    "eslint-plugin-react": "^7.10.0",
     "eslint-watch": "^2.1.14",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^3.2.0",
     "mocha": "^3.1.0",
     "nock": "^8.0.0",
     "node-sass": "^3.10.1",
     "npm-run-all": "^3.1.0",
     "open": "0.0.5",
     "postcss-loader": "^0.13.0",
+    "progress-bar-webpack-plugin": "^1.11.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.1.0",
     "webpack-dev-middleware": "^1.8.3",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-md5-hash": "^0.0.6"
   },
   "dependencies": {
     "apisauce": "^0.5.0",

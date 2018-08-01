@@ -1,190 +1,221 @@
+/* eslint-disable no-use-before-define, max-len, import/imports-first */
+dotenv.load({ silent: true });
+
 import path from 'path';
-import webpack from 'webpack';
 import dotenv from 'dotenv';
-
-dotenv.config({ silent: true });
-const BUILD = process.env.NODE_ENV;
-console.log('BUILD: ', BUILD);
-
-const envs = {
-  development: {
-    NODE_ENV: JSON.stringify(BUILD),
-    PORT: JSON.stringify(3001),
-    BASE_URL: JSON.stringify(process.env.BASE_URL),
-  },
-  production: {
-    NODE_ENV: JSON.stringify(BUILD),
-    PORT: JSON.stringify(process.env.PORT),
-    DEPLOY_URL: JSON.stringify(process.env.DEPLOY_URL),
-  },
-};
+import webpack from 'webpack';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import WebpackMd5Hash from 'webpack-md5-hash';
+import analyzer from 'webpack-bundle-analyzer';
+import autoprefixer from 'autoprefixer';
+import webpackEnvs from './tools/webpack_envs';
+// import CommonsChunkPlugin from './node_modules/webpack/lib/optimize/CommonsChunkPlugin';
 
 const devConfig = {
-  noInfo: true,
-  devtool: 'inline-source-map',
-  target: 'web',
-  debug: true,
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    './src/Styles/style.scss',
-    './src/index.js',
-  ],
-  output: {
-    path: path.resolve('public'),
-    publicPath: '/',
-    filename: 'bundle.js',
+  mode: 'development',
+  resolve: {
+    extensions: ['*', '.js', '.jsx', '.json']
   },
-  devServer: {
-    contentBase: './src',
+  stats: {
+    colors: true,
+    reasons: true,
+    chunks: true
+  },
+  devtool: 'source-map',
+  target: 'web',
+  entry: {
+    app: [
+      'webpack-hot-middleware/client?reload=true',
+      path.resolve('./src/index')
+      // NOTE - Commented out because style sheets are imported directly into bundle.js - UNDO if you desire to extract styles directly.  When using code-splitting the benefits are marginal.
+      // './src/Styles/style.scss',
+    ]
+  },
+  output: {
+    path: path.resolve('src'),
+    publicPath: '/',
+    filename: 'bundle.[name].js'
   },
   plugins: [
+    new ProgressBarPlugin(),
+    // new CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   filename: 'bundle.[name].js',
+    //   minChunks: module =>
+    //     module.context && module.context.indexOf('node_modules') !== -1
+    // }),
+    // new CommonsChunkPlugin({
+    //   name: 'common',
+    //   filename: 'bundle.[name].js'
+    // }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({ 'process.env': envs.development }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({ 'process.env': webpackEnvs.development }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      inject: true,
+      filename: './index.html'
     }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: false,
+      noInfo: true,
+      options: {
+        sassLoader: {
+          includePaths: [path.resolve('src', 'scss')]
+        },
+        context: '/',
+        postcss: () => [autoprefixer]
+      }
+    })
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|bower_components)/,
-        include: path.resolve('src'),
+        exclude: /(node_modules|bower_components)/
       },
       {
-        test: /(\.css)$/,
-        loaders: ['style', 'css'],
+        test: /(\.css|\.s[ac]ss)$/,
+        loaders: [
+          'style-loader',
+          'css-loader?sourceMap',
+          'postcss-loader',
+          'sass-loader?sourceMap'
+        ]
+      },
+      { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]' },
+      { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader' },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
-        test: /\.s[ac]ss$/,
-        loaders: ['style', 'css', 'sass', 'postcss-loader'],
+        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
       },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file',
-      },
-      {
-        test: /\.(woff|woff2)$/,
-        loader: 'url?prefix=font/&limit=5000',
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream',
-      },
+      { test: /\.ico$/, loader: 'file-loader?name=[name].[ext]' },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml',
-      },
-      {
-        test: /\.(png|gif|jpg|jpeg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10000?',
-      },
-      {
-        test: /\.(woff2?|ttf|eot|svg)(\?[\s\S]+)?$/,
-        loader: 'file?emitFile=false',
-      },
-      {
-        test: /\.(jpe?g|png|giff|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
-        ],
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-  },
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      }
+    ]
+  }
 };
-
+// -------------------------------------------------------------------
 const prodConfig = {
-  devtool: 'source-map',
-  noInfo: true,
-  debug: true,
+  mode: 'production',
+  resolve: {
+    extensions: ['*', '.js', '.jsx', '.json']
+  },
+  stats: {
+    colors: true,
+    reasons: true,
+    chunks: true
+  },
+  devtool: false,
   target: 'web',
-  entry: [
-    './src/Styles/style.scss',
-    './src/index.js',
-  ],
+  entry: {
+    app: path.resolve('./src/index')
+  },
   output: {
     path: path.resolve('dist'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'bundle.[name].js'
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin({ 'process.env': envs.production }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
+    new ProgressBarPlugin(),
+    // new CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   filename: 'bundle.[name].js',
+    //   minChunks: module =>
+    //     module.context && module.context.indexOf('node_modules') !== -1
+    // }),
+    // new CommonsChunkPlugin({
+    //   name: 'common',
+    //   filename: 'bundle.[name].js'
+    // }),
+    new WebpackMd5Hash(),
+    new webpack.DefinePlugin({ 'process.env': webpackEnvs.production }),
+    new HtmlWebpackPlugin({
+      template: 'tools/index.template.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDocType: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      },
+      inject: true,
+      title: 'Nic Juice 2 Japan',
+      filename: './index.html'
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    new ExtractTextPlugin('[name].[hash].css'),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: { warnings: false },
+    //   comments: false,
+    //   sourceMap: true
+    // }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+      noInfo: true,
+      options: {
+        sassLoader: {
+          includePaths: [path.resolve(__dirname, 'src', 'scss')]
+        },
+        context: '/',
+        postcss: () => [autoprefixer]
+      }
+    }),
+    new analyzer.BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: '../build-report.html'
+    })
   ],
   module: {
-    loaders: [
+    rules: [
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules|bower_components)/,
-        include: path.resolve('src'),
+        test: /(\.css|\.s[ac]ss)$/,
+        loader: ExtractTextPlugin.extract(
+          'css-loader?sourceMap!postcss-loader!sass-loader'
+        )
       },
       {
-        test: /\.s[ac]ss$/,
-        loaders: ['style', 'css', 'sass', 'postcss-loader'],
+        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
+        loader: 'url-loader?name=[name].[ext]'
       },
       {
-        test: /\.css$/,
-        loader: 'style!css',
-        exclude: /(node_modules|bower_components)/,
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader:
+          'url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]'
       },
       {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file',
+        test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
+        loader:
+          'url-loader?limit=10000&mimetype=application/octet-stream&name=[name].[ext]'
       },
       {
-        test: /\.(woff|woff2)$/,
-        loader: 'url?prefix=font/&limit=5000',
+        test: /\.svg(\?v=\d+.\d+.\d+)?$/,
+        loader:
+          'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]'
       },
-      {
-        test: /\.tff(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream',
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml',
-      },
-      {
-        test: /\.(png|gif|jpg|jpeg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10000?',
-      },
-      {
-        test: /\.(woff2?|ttf|eot|svg)(\?[\s\S]+)?$/,
-        loader: 'file?emitFile=false',
-      },
-      {
-        test: /\.(jpe?g|png|giff|svg)$/i,
-        loaders: [
-          'file?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
-        ],
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-  },
+      { test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]' }
+    ]
+  }
 };
-export default (BUILD === 'production') ? prodConfig : devConfig;
+
+export default (process.env.NODE_ENV === 'production' ? prodConfig : devConfig);
